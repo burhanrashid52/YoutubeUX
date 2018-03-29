@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ja.burhanrashid52.base">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

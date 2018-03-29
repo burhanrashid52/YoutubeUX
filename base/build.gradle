@@ -1,0 +1,83 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Versions.compile_sdk_version
+
+    defaultConfig {
+        minSdkVersion Versions.min_sdk_version
+        targetSdkVersion Versions.target_sdk_version
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    kapt {
+        generateStubs = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api KotlinDeps.kotlin_std_lib
+    api KotlinDeps.android_ktx
+    api SupportDeps.appcompact_v7
+    api SupportDeps.desgin
+    api SupportDeps.constraint_layout
+
+    api OtherDeps.timber
+    api OtherDeps.glide
+    kapt OtherDeps.glide_processer
+    compile('com.github.ihsanbal:LoggingInterceptor:2.0.5') {
+        exclude group: 'org.json', module: 'json'
+    }
+
+
+    api DaggerDeps.main
+    api DaggerDeps.support
+    kapt DaggerDeps.processer
+    kapt DaggerDeps.compiler
+
+    api RetrofitDeps.main
+    api RetrofitDeps.okhttp
+    api RetrofitDeps.oki
+    api RetrofitDeps.logging
+    api RetrofitDeps.gson
+    api RetrofitDeps.gson_converter
+
+    api RxDeps.main
+    api RxDeps.android
+    api RxDeps.retrofit
+
+    api ArchComponents.room
+    kapt ArchComponents.room_compiler
+    api ArchComponents.life_cycle_ext
+    kapt ArchComponents.life_cycle_compiler
+    api ArchComponents.paging
+
+    testImplementation TestDeps.junit
+    androidTestImplementation TestDeps.runner
+    androidTestImplementation TestDeps.espresso_core
+
+    testImplementation TestDeps.test_live_data
+    testImplementation TestDeps.test_room
+}

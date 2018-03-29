@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">YoutubePlayer</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Activity</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_trending">Trending</string>
+    <string name="title_subscription">Subscription</string>
+    <string name="title_library">Library</string>
+    <string name="transition_poster">movie_poster</string>
+</resources>
