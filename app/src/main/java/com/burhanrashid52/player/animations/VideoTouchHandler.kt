@@ -45,7 +45,6 @@ class VideoTouchHandler(activity: DashboardActivity, private var eventsListener:
         const val SCALE_THRESHOLD = 0.35F
         const val SWIPE_MIN_DISTANCE = 120
 
-
     }
 
     //Setup the constraint view with both FrameLayout and guidelines
