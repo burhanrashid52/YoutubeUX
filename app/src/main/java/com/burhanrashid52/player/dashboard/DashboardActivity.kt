@@ -6,6 +6,7 @@ import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.design.widget.BottomNavigationView
 import android.support.transition.ChangeBounds
+import android.support.transition.Transition
 import android.support.transition.TransitionManager
 import android.view.View
 import android.view.animation.AnticipateOvershootInterpolator
@@ -17,7 +18,6 @@ import com.burhanrashid52.player.animations.VideoTouchHandler
 import com.burhanrashid52.player.home.HomeFragment
 import ja.burhanrashid52.base.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_player.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
@@ -100,13 +100,10 @@ class DashboardActivity : BaseActivity(), Events {
             }
         })
 
-        val videoUrl = "http://www.sample-videos.com/video/mp4/480/big_buck_bunny_480p_30mb.mp4"
+        //  val videoUrl = "http://www.sample-videos.com/video/mp4/480/big_buck_bunny_480p_30mb.mp4"
 
-        animationTouchListener = VideoTouchHandler(this, this)
-
-        //animationTouchListener.isExpanded = true
         hide()
-
+        animationTouchListener = VideoTouchHandler(this, this)
         frmVideoContainer.setOnTouchListener(animationTouchListener)
     }
 
@@ -115,7 +112,7 @@ class DashboardActivity : BaseActivity(), Events {
     }
 
     override fun onDismiss(view: View) {
-        toast(if (removeFragment(VideoPlayerFragment.TAG)) "Removed" else "Failed")
+        dismiss()
     }
 
     override fun onScale(percentage: Float) {
@@ -124,6 +121,10 @@ class DashboardActivity : BaseActivity(), Events {
 
     override fun onSwipe(percentage: Float) {
         swipeVideo(percentage)
+    }
+
+    override fun onExpand(isExpanded: Boolean) {
+        setViewExpanded(isExpanded)
     }
 
     override fun onBackPressed() {
@@ -177,19 +178,69 @@ class DashboardActivity : BaseActivity(), Events {
         guidelineMarginEnd.layoutParams = paramsGlMarginEnd
     }
 
-    private fun hide() {
-        with(constraintSet) {
-            clone(rootContainer)
+    /**
+     * Hide all video and video details fragment
+     */
+    private fun hide() = rootContainer.updateParams {
 
-            setGuidelinePercent(guidelineHorizontal.id, 100F)
-            setGuidelinePercent(guidelineVertical.id, 100F)
-            setAlpha(frmDetailsContainer.id, 0F)
+        setGuidelinePercent(guidelineHorizontal.id, 100F)
+        setGuidelinePercent(guidelineVertical.id, 100F)
+        setAlpha(frmDetailsContainer.id, 0F)
 
-            TransitionManager.beginDelayedTransition(rootContainer, ChangeBounds().apply {
-                interpolator = AnticipateOvershootInterpolator(1.0f)
-                duration = 250
-            })
-            applyTo(rootContainer)
-        }
+        TransitionManager.beginDelayedTransition(rootContainer, ChangeBounds().apply {
+            interpolator = AnticipateOvershootInterpolator(1.0f)
+            duration = 250
+        })
     }
+
+    /**
+     * Expand or collapse the video fragment animation
+     */
+    private fun setViewExpanded(isExpanded: Boolean) = rootContainer.updateParams(constraintSet) {
+
+        setGuidelinePercent(guidelineHorizontal.id, if (isExpanded) 0F else VideoTouchHandler.MIN_VERTICAL_LIMIT)
+        setGuidelinePercent(guidelineVertical.id, if (isExpanded) 0F else VideoTouchHandler.MIN_HORIZONTAL_LIMIT)
+        setGuidelinePercent(guidelineBottom.id, if (isExpanded) 1F else VideoTouchHandler.MIN_BOTTOM_LIMIT)
+        setGuidelinePercent(guidelineMarginEnd.id, if (isExpanded) 1F else VideoTouchHandler.MIN_MARGIN_END_LIMIT)
+        setAlpha(frmDetailsContainer.id, if (isExpanded) 1.0F else 0F)
+
+        TransitionManager.beginDelayedTransition(rootContainer, ChangeBounds().apply {
+            interpolator = android.view.animation.AnticipateOvershootInterpolator(1.0f)
+            duration = 250
+        })
+    }
+
+    /**
+     * Show dismiss animation when user have moved
+     * more than 50% horizontally
+     */
+    private fun dismiss() = rootContainer.updateParams(constraintSet) {
+
+        setGuidelinePercent(guidelineVertical.id, VideoTouchHandler.MIN_HORIZONTAL_LIMIT - VideoTouchHandler.MIN_MARGIN_END_LIMIT)
+        setGuidelinePercent(guidelineMarginEnd.id, 0F)
+
+        TransitionManager.beginDelayedTransition(rootContainer, ChangeBounds().apply {
+            interpolator = AnticipateOvershootInterpolator(1.0f)
+            duration = 250
+            addListener(object : Transition.TransitionListener {
+                override fun onTransitionResume(transition: Transition) {
+                }
+
+                override fun onTransitionPause(transition: Transition) {
+                }
+
+                override fun onTransitionCancel(transition: Transition) {
+                }
+
+                override fun onTransitionStart(transition: Transition) {
+                }
+
+                override fun onTransitionEnd(transition: Transition) {
+                    toast(if (removeFragment(VideoPlayerFragment.TAG)) "Removed" else "Failed")
+                }
+            })
+        })
+    }
+
+
 }

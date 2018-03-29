@@ -3,6 +3,8 @@ package ja.burhanrashid52.base
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.support.constraint.ConstraintLayout
+import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentTransaction
@@ -83,6 +85,12 @@ fun ImageView.loadFromUrl(imageUrl: String, placeHolder: Int = R.drawable.img_pl
             .into(this)
 }
 
+inline fun ConstraintLayout.updateParams(constraintSet: ConstraintSet = ConstraintSet(), updates: ConstraintSet.() -> Unit) {
+    constraintSet.clone(this)
+    constraintSet.updates()
+    constraintSet.applyTo(this)
+}
+
 inline fun <reified T : ViewModel> FragmentActivity.getViewModel() = ViewModelProviders.of(this).get(T::class.java)
 
 inline fun <reified T : ViewModel> Fragment.getViewModel() = ViewModelProviders.of(this).get(T::class.java)
@@ -91,5 +99,4 @@ inline fun <reified T : ViewModel> Fragment.getActivityViewModel() = ViewModelPr
 
 inline fun <reified T : ViewGroup.LayoutParams> View.getParams() = this.layoutParams as T
 
-inline fun <reified T : ViewGroup.LayoutParams> ViewGroup.getParams() = this.layoutParams as T
 

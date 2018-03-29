@@ -21,8 +21,8 @@ class HomeAdapter(private val listener: ((Movies) -> Unit)? = null) : RecyclerVi
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.row_movies, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.row_movies, parent, false)
         return HomeViewHolder(view)
     }
 

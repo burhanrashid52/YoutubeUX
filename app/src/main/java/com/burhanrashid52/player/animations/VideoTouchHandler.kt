@@ -1,19 +1,11 @@
 package com.burhanrashid52.player.animations
 
 import android.annotation.SuppressLint
-import android.support.constraint.ConstraintSet
-import android.support.transition.ChangeBounds
-import android.support.transition.Transition
-import android.support.transition.TransitionManager
+import android.app.Activity
+import android.content.res.Resources
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import android.view.animation.AnticipateOvershootInterpolator
-import com.burhanrashid52.player.dashboard.DashboardActivity
-import ja.burhanrashid52.base.getDeviceHeight
-import ja.burhanrashid52.base.getDeviceWidth
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import timber.log.Timber
 
 
@@ -24,7 +16,7 @@ import timber.log.Timber
  * animation on Framelayout onTouchListener.The logic for animation resides here to make
  * it modular
  */
-class VideoTouchHandler(activity: DashboardActivity, private var eventsListener: Events) : View.OnTouchListener {
+class VideoTouchHandler(activity: Activity, private var eventsListener: Events) : View.OnTouchListener {
 
     companion object {
         val TAG = VideoTouchHandler::class.java.simpleName
@@ -47,18 +39,8 @@ class VideoTouchHandler(activity: DashboardActivity, private var eventsListener:
 
     }
 
-    //Setup the constraint view with both FrameLayout and guidelines
-    private val rootConstraint = activity.rootContainer
-    private val glHorizontal = rootConstraint.guidelineHorizontal
-    private val glVertical = rootConstraint.guidelineVertical
-    private val glBottom = rootConstraint.guidelineBottom
-    private val glMarginEnd = rootConstraint.guidelineMarginEnd
-    private val frmVideoDetails = rootConstraint.frmDetailsContainer
-    private val frmVideoContainer = rootConstraint.frmVideoContainer
-
-    private val constraintSet = ConstraintSet()
-    private val deviceHeight = activity.getDeviceHeight()
-    private val deviceWidth = activity.getDeviceWidth()
+    private val deviceHeight = Resources.getSystem().displayMetrics.heightPixels//activity.getDeviceHeight()
+    private val deviceWidth = Resources.getSystem().displayMetrics.widthPixels//activity.getDeviceWidth()
 
     //Gesture controls and scroll flags
     private var gestureDetector = GestureDetector(activity, GestureControl())
@@ -104,6 +86,8 @@ class VideoTouchHandler(activity: DashboardActivity, private var eventsListener:
                         val percentHorizontalMoved = Math.max(-0.25F, Math.min(VideoTouchHandler.MIN_HORIZONTAL_LIMIT, percentHorizontal))
                         percentMarginMoved = percentHorizontalMoved + (VideoTouchHandler.MIN_MARGIN_END_LIMIT - VideoTouchHandler.MIN_HORIZONTAL_LIMIT)
 
+                        Timber.e("" + percentHorizontal)
+
                         eventsListener.onSwipe(percentHorizontal)
                         //swipeVideo(percentHorizontal)
                     }
@@ -125,7 +109,9 @@ class VideoTouchHandler(activity: DashboardActivity, private var eventsListener:
                 isTopScroll = false
                 isSwipeScroll = false
                 if (percentMarginMoved < 0.5) {
-                    dismiss()
+                    //dismiss the video player
+                    eventsListener.onDismiss(view)
+                    resetValues()
                 } else {
                     isExpanded = percentVertical < SCALE_THRESHOLD
                 }
@@ -168,68 +154,8 @@ class VideoTouchHandler(activity: DashboardActivity, private var eventsListener:
     var isExpanded = true
         set(value) {
             field = value
-            setViewExpanded(field)
+            eventsListener.onExpand(field)
         }
-
-    /**
-     * Expand or collapse the video fragment animation
-     */
-    private fun setViewExpanded(isExpanded: Boolean) = with(constraintSet) {
-
-        clone(rootConstraint)
-
-        setGuidelinePercent(glHorizontal.id, if (isExpanded) 0F else MIN_VERTICAL_LIMIT)
-        setGuidelinePercent(glVertical.id, if (isExpanded) 0F else MIN_HORIZONTAL_LIMIT)
-        setGuidelinePercent(glBottom.id, if (isExpanded) 1F else MIN_BOTTOM_LIMIT)
-        setGuidelinePercent(glMarginEnd.id, if (isExpanded) 1F else MIN_MARGIN_END_LIMIT)
-        setAlpha(frmVideoDetails.id, if (isExpanded) 1.0F else 0F)
-
-        TransitionManager.beginDelayedTransition(rootConstraint, ChangeBounds().apply {
-            interpolator = android.view.animation.AnticipateOvershootInterpolator(1.0f)
-            duration = 250
-        })
-        applyTo(rootConstraint)
-    }
-
-
-    /**
-     * Show dismiss animation when user have moved
-     * more than 50% horizontally
-     */
-    private fun dismiss() = with(constraintSet) {
-
-        clone(rootConstraint)
-
-        setGuidelinePercent(glVertical.id, MIN_HORIZONTAL_LIMIT - MIN_MARGIN_END_LIMIT)
-        setGuidelinePercent(glMarginEnd.id, 0F)
-
-        TransitionManager.beginDelayedTransition(rootConstraint, ChangeBounds().apply {
-            interpolator = AnticipateOvershootInterpolator(1.0f)
-            duration = 250
-            addListener(object : Transition.TransitionListener {
-                override fun onTransitionResume(transition: Transition) {
-                }
-
-                override fun onTransitionPause(transition: Transition) {
-                }
-
-                override fun onTransitionCancel(transition: Transition) {
-                }
-
-                override fun onTransitionStart(transition: Transition) {
-                }
-
-                override fun onTransitionEnd(transition: Transition) {
-                    eventsListener.onDismiss(frmVideoContainer)
-                    resetValues()
-                }
-
-            })
-        })
-        applyTo(rootConstraint)
-    }
-
-
 
 
     fun show() {
