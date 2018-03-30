@@ -8,11 +8,11 @@
 
     <item
         android:id="@+id/navigation_trending"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_trending_up_black_24dp"
         android:title="@string/title_trending" />
     <item
         android:id="@+id/navigation_subscription"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_subscriptions_black_24dp"
         android:title="@string/title_subscription" />
 
     <item
@@ -22,8 +22,7 @@
 
     <item
         android:id="@+id/navigation_library"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_library_black_24dp"
         android:title="@string/title_library" />
-
 
 </menu>

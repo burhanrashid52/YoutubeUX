@@ -3,6 +3,10 @@ package ja.burhanrashid52.base
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.support.annotation.DrawableRes
+import android.support.annotation.IdRes
+import android.support.annotation.IntDef
+import android.support.annotation.LayoutRes
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
@@ -54,8 +58,12 @@ fun Fragment.toast(message: String, isLong: Boolean = false) {
     Toast.makeText(this.activity, message, if (isLong) Toast.LENGTH_LONG else Toast.LENGTH_SHORT).show()
 }
 
-fun AppCompatActivity.removeFragment(tag: String): Boolean {
+fun AppCompatActivity.removeFragmentByTag(tag: String): Boolean {
     return removeFragment(supportFragmentManager.findFragmentByTag(tag))
+}
+
+fun AppCompatActivity.removeFragmentByID(@IdRes containerID: Int): Boolean {
+    return removeFragment(supportFragmentManager.findFragmentById(containerID))
 }
 
 fun AppCompatActivity.removeFragment(fragment: Fragment?): Boolean {
@@ -98,5 +106,4 @@ inline fun <reified T : ViewModel> Fragment.getViewModel() = ViewModelProviders.
 inline fun <reified T : ViewModel> Fragment.getActivityViewModel() = ViewModelProviders.of(activity!!).get(T::class.java)
 
 inline fun <reified T : ViewGroup.LayoutParams> View.getParams() = this.layoutParams as T
-
 

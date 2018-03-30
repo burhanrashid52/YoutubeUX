@@ -73,14 +73,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineBottom" />
 
-    <android.support.design.widget.BottomNavigationView
+    <ja.burhanrashid52.base.widgets.BaseBottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@android:color/white"
         app:itemIconTint="@drawable/bottom_selector"
         app:itemTextColor="@drawable/bottom_selector"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineBottom"
         app:menu="@menu/navigation" />

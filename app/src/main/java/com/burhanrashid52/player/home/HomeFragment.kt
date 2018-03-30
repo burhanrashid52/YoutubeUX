@@ -12,6 +12,7 @@ import ja.burhanrashid52.base.BaseFragment
 import ja.burhanrashid52.base.getActivityViewModel
 import ja.burhanrashid52.base.loadFragment
 import ja.burhanrashid52.base.repo.Status.*
+import ja.burhanrashid52.base.widgets.SimpleDividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -36,6 +37,7 @@ private constructor() : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         dashboardViewModel = getActivityViewModel()
         rvMovies.layoutManager = LinearLayoutManager(activity)
+        rvMovies.addItemDecoration(SimpleDividerItemDecoration(context))
         rvMovies.adapter = homeAdapter
 
         dashboardViewModel.movies.observe(this, Observer {
@@ -54,5 +56,4 @@ private constructor() : BaseFragment() {
             }
         })
     }
-
 }

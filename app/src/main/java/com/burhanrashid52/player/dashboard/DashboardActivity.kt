@@ -13,13 +13,21 @@ import android.view.animation.AnticipateOvershootInterpolator
 import com.burhanrashid52.player.R
 import com.burhanrashid52.player.VideoDetailsFragment
 import com.burhanrashid52.player.VideoPlayerFragment
+import com.burhanrashid52.player.activity.UserActivityFragment
 import com.burhanrashid52.player.animations.Events
 import com.burhanrashid52.player.animations.VideoTouchHandler
 import com.burhanrashid52.player.home.HomeFragment
+import com.burhanrashid52.player.library.LibraryFragment
+import com.burhanrashid52.player.subscriptions.SubscriptionFragment
+import com.burhanrashid52.player.trending.TrendingFragment
 import ja.burhanrashid52.base.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_player.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import android.support.v4.view.MenuItemCompat.getActionView
+import android.support.v7.widget.SearchView
+import android.view.Menu
+import android.support.v4.view.MenuItemCompat.getActionView
 
 
 /**
@@ -53,9 +61,29 @@ class DashboardActivity : BaseActivity(), Events {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_library -> {
+                loadFragment {
+                    replace(R.id.frmHomeContainer, LibraryFragment.newInstance(), LibraryFragment.TAG)
+                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
+                loadFragment {
+                    replace(R.id.frmHomeContainer, UserActivityFragment.newInstance(), UserActivityFragment.TAG)
+                }
+                return@OnNavigationItemSelectedListener true
+            }
+
+            R.id.navigation_trending -> {
+                loadFragment {
+                    replace(R.id.frmHomeContainer, TrendingFragment.newInstance(), TrendingFragment.TAG)
+                }
+                return@OnNavigationItemSelectedListener true
+            }
+
+            R.id.navigation_subscription -> {
+                loadFragment {
+                    replace(R.id.frmHomeContainer, SubscriptionFragment.newInstance(), SubscriptionFragment.TAG)
+                }
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -69,6 +97,8 @@ class DashboardActivity : BaseActivity(), Events {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        bottomNavigation.disableShiftMode(true)
 
         paramsGlHorizontal = guidelineHorizontal.getParams()
         paramsGlVertical = guidelineVertical.getParams()
@@ -105,6 +135,19 @@ class DashboardActivity : BaseActivity(), Events {
         hide()
         animationTouchListener = VideoTouchHandler(this, this)
         frmVideoContainer.setOnTouchListener(animationTouchListener)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.home_menu, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+
+        val searchView = searchItem.actionView as SearchView
+        searchView.queryHint = "Search People"
+        // searchView.setOnQueryTextListener(this)
+
+        return true
     }
 
     override fun onClick(view: View) {
@@ -236,7 +279,8 @@ class DashboardActivity : BaseActivity(), Events {
                 }
 
                 override fun onTransitionEnd(transition: Transition) {
-                    toast(if (removeFragment(VideoPlayerFragment.TAG)) "Removed" else "Failed")
+                    //Remove Video when swipe animation is ended
+                    removeFragmentByID(R.id.frmVideoContainer)
                 }
             })
         })

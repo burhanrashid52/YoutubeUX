@@ -2,7 +2,10 @@ package com.burhanrashid52.player
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
+import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.support.transition.TransitionInflater
 import androidx.net.toUri
 import androidx.os.bundleOf
 import androidx.view.isGone
@@ -12,6 +15,7 @@ import ja.burhanrashid52.base.getActivityViewModel
 import ja.burhanrashid52.base.loadFromUrl
 import ja.burhanrashid52.base.toast
 import kotlinx.android.synthetic.main.fragment_player.*
+import timber.log.Timber
 
 /**
  * Created by Burhanuddin Rashid on 2/21/2018.
@@ -34,6 +38,9 @@ private constructor() : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        }
     }
 
     private lateinit var dashboardViewModel: DashboardViewModel
@@ -58,6 +65,19 @@ private constructor() : BaseFragment() {
                 }
             }
         })
+
+        val countDownTimer = object : CountDownTimer(15000, 1000) {
+            override fun onFinish() {
+                Timber.e("Finish")
+                activity?.supportFragmentManager?.beginTransaction()?.remove(this@VideoPlayerFragment)?.commit()
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+                Timber.e("Tick")
+            }
+
+        }
+        // countDownTimer.start()
 
         videoPlayer.setOnCompletionListener {
             videoPlayer.start()
