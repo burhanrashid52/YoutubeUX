@@ -1,6 +1,8 @@
 package com.burhanrashid52.player.dashboard
 
+import android.app.NotificationManager
 import android.arch.lifecycle.Observer
+import android.content.Context
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
@@ -28,6 +30,9 @@ import android.support.v4.view.MenuItemCompat.getActionView
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.support.v4.view.MenuItemCompat.getActionView
+import android.view.LayoutInflater
+import androidx.content.systemService
+import timber.log.Timber
 
 
 /**
@@ -284,6 +289,13 @@ class DashboardActivity : BaseActivity(), Events {
                 }
             })
         })
+    }
+
+    override fun onContentChanged() {
+        super.onContentChanged()
+        Timber.e("Config Changes")
+        val context: Context = this
+        val v: NotificationManager = context.systemService()
     }
 
 

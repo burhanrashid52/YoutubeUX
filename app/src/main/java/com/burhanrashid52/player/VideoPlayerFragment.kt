@@ -2,10 +2,13 @@ package com.burhanrashid52.player
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
+import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.transition.TransitionInflater
+import android.view.LayoutInflater
+import androidx.content.systemService
 import androidx.net.toUri
 import androidx.os.bundleOf
 import androidx.view.isGone
@@ -85,6 +88,10 @@ private constructor() : BaseFragment() {
 
         btnChild.setOnClickListener {
             toast("Video Clicked")
+        }
+
+        imgFullScreen.setOnClickListener {
+            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
     }
 
