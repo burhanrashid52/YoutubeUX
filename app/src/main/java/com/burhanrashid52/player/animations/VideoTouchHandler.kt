@@ -55,8 +55,13 @@ class VideoTouchHandler(activity: Activity, private var eventsListener: Events) 
     private var percentVertical = 0F
     private var percentMarginMoved = MIN_MARGIN_END_LIMIT
 
+    var isEnabled = true
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, event: MotionEvent): Boolean {
+        if (!isEnabled) {
+            return false
+        }
         if (gestureDetector.onTouchEvent(event)) {
             eventsListener.onClick(view)
             return true

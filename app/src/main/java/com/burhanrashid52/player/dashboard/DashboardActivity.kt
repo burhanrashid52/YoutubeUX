@@ -3,6 +3,8 @@ package com.burhanrashid52.player.dashboard
 import android.app.NotificationManager
 import android.arch.lifecycle.Observer
 import android.content.Context
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
@@ -148,8 +150,8 @@ class DashboardActivity : BaseActivity(), Events {
 
         val searchItem = menu.findItem(R.id.action_search)
 
-        val searchView = searchItem.actionView as SearchView
-        searchView.queryHint = "Search People"
+//        val searchView = searchItem.actionView as SearchView
+        //      searchView.queryHint = "Search People"
         // searchView.setOnQueryTextListener(this)
 
         return true
@@ -178,9 +180,13 @@ class DashboardActivity : BaseActivity(), Events {
     override fun onBackPressed() {
         if (animationTouchListener.isExpanded) {
             animationTouchListener.isExpanded = false
+            if (!isPortrait()) {
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            }
         } else {
             super.onBackPressed()
         }
+
     }
 
     /**
@@ -291,12 +297,16 @@ class DashboardActivity : BaseActivity(), Events {
         })
     }
 
-    override fun onContentChanged() {
-        super.onContentChanged()
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
         Timber.e("Config Changes")
-        val context: Context = this
-        val v: NotificationManager = context.systemService()
+        if (isPortrait()) {
+            animationTouchListener.isEnabled = true
+        } else {
+            animationTouchListener.isEnabled = false
+            makeFullScreen()
+        }
+
     }
-
-
 }

@@ -28,6 +28,11 @@ private constructor() : BaseFragment() {
         fun newInstance() = HomeFragment()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance=true
+    }
+
     private val homeAdapter = HomeAdapter {
         dashboardViewModel.loadVideo(it)
     }

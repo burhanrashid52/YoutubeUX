@@ -1,8 +1,10 @@
 package ja.burhanrashid52.base
 
+import android.app.Activity
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.support.annotation.IntDef
@@ -41,6 +43,8 @@ inline fun AppCompatActivity.loadFragment(isAddToBackStack: Boolean = false,
     if (isAddToBackStack) beginTransaction.addToBackStack(null)
     beginTransaction.commit()
 }
+
+fun Activity.isPortrait() = requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
 fun AppCompatActivity.getDeviceWidth() = with(this) {
     val displayMetrics = DisplayMetrics()

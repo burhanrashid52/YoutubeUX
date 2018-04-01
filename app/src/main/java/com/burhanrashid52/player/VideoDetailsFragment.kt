@@ -18,7 +18,7 @@ private constructor() : BaseFragment() {
 
     companion object {
         val TAG = VideoPlayerFragment::class.java.simpleName
-        const val EXTRA_MOVIE_ID = "extar_movie_id"
+        private const val EXTRA_MOVIE_ID = "extra_movie_id"
         fun newInstance() = VideoDetailsFragment()
 
         fun newInstance(movieId: Int) = VideoDetailsFragment().apply {
@@ -26,6 +26,11 @@ private constructor() : BaseFragment() {
                     EXTRA_MOVIE_ID to movieId
             )
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance=true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
