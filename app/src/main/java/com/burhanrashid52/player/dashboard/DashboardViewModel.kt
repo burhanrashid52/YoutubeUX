@@ -20,6 +20,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     lateinit var moviesRepository: MoviesRepository
     val movies: LiveData<Resource<List<Movies>>>
     val moviesSelectionListener = SingleLiveEvent<Movies>()
+    val playerGestureListener = SingleLiveEvent<Int>()
 
     init {
         DaggerActivityComponent.builder()
@@ -33,6 +34,8 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     fun loadVideo(movies: Movies) {
         moviesSelectionListener.value = movies
     }
+
+
 
     fun getMoviesDetails(movieId: Int) = moviesRepository.getMoviesDetails(movieId)
 }

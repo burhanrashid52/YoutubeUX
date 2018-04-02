@@ -1,11 +1,10 @@
 package com.burhanrashid52.player.dashboard
 
-import android.app.NotificationManager
 import android.arch.lifecycle.Observer
-import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Handler
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.design.widget.BottomNavigationView
@@ -28,12 +27,9 @@ import ja.burhanrashid52.base.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_player.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
-import android.support.v4.view.MenuItemCompat.getActionView
-import android.support.v7.widget.SearchView
 import android.view.Menu
-import android.support.v4.view.MenuItemCompat.getActionView
-import android.view.LayoutInflater
-import androidx.content.systemService
+import androidx.os.postDelayed
+import androidx.view.isGone
 import timber.log.Timber
 
 
@@ -57,6 +53,7 @@ class DashboardActivity : BaseActivity(), Events {
     private lateinit var paramsGlMarginEnd: ConstraintLayout.LayoutParams
 
     private val constraintSet = ConstraintSet()
+    private val handler = Handler()
 
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
@@ -158,7 +155,11 @@ class DashboardActivity : BaseActivity(), Events {
     }
 
     override fun onClick(view: View) {
-        animationTouchListener.isExpanded = true
+        if (!animationTouchListener.isExpanded) {
+            animationTouchListener.isExpanded = true
+        } else {
+            mDashboardViewModel.playerGestureListener.value = 1
+        }
     }
 
     override fun onDismiss(view: View) {
@@ -303,10 +304,13 @@ class DashboardActivity : BaseActivity(), Events {
         Timber.e("Config Changes")
         if (isPortrait()) {
             animationTouchListener.isEnabled = true
+            enableFullScreen(false)
         } else {
             animationTouchListener.isEnabled = false
-            makeFullScreen()
+            if (!animationTouchListener.isExpanded) {
+                animationTouchListener.isExpanded = true
+            }
+            enableFullScreen(true)
         }
-
     }
 }

@@ -3,6 +3,7 @@ package com.burhanrashid52.player
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -12,6 +13,7 @@ import androidx.content.systemService
 import androidx.net.toUri
 import androidx.os.bundleOf
 import androidx.view.isGone
+import androidx.view.isVisible
 import com.burhanrashid52.player.dashboard.DashboardViewModel
 import ja.burhanrashid52.base.BaseFragment
 import ja.burhanrashid52.base.getActivityViewModel
@@ -55,6 +57,8 @@ private constructor() : BaseFragment() {
 
         val movieID = arguments?.getInt(EXTRA_MOVIE_ID) ?: 0
 
+        showControllers(false)
+
         dashboardViewModel.getMoviesDetails(movieID).observe(this, Observer {
 
             it?.data?.let {
@@ -69,19 +73,6 @@ private constructor() : BaseFragment() {
             }
         })
 
-        val countDownTimer = object : CountDownTimer(15000, 1000) {
-            override fun onFinish() {
-                Timber.e("Finish")
-                activity?.supportFragmentManager?.beginTransaction()?.remove(this@VideoPlayerFragment)?.commit()
-            }
-
-            override fun onTick(millisUntilFinished: Long) {
-                Timber.e("Tick")
-            }
-
-        }
-        // countDownTimer.start()
-
         videoPlayer.setOnCompletionListener {
             videoPlayer.start()
         }
@@ -93,14 +84,12 @@ private constructor() : BaseFragment() {
         imgFullScreen.setOnClickListener {
             activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
-    }
 
-    override fun onDetach() {
-        super.onDetach()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
+        dashboardViewModel.playerGestureListener.observe(this, Observer {
+            it?.let {
+                showControllers(!imgFullScreen.isVisible)
+            }
+        })
     }
 
     override fun onDestroy() {
@@ -108,5 +97,15 @@ private constructor() : BaseFragment() {
         if (videoPlayer != null) {
             videoPlayer.stopPlayback()
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        Timber.e("Fragment Config Changes")
+    }
+
+    private fun showControllers(isShow: Boolean) {
+        imgFullScreen.isGone = !isShow
+        imgPlay.isGone = !isShow
     }
 }
