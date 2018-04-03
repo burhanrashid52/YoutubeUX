@@ -8,7 +8,7 @@ import android.view.View
  *
  * Event callback listener interface to pass events to the UI to perform actions
  */
-interface Events {
+interface GestureEvents {
     fun onClick(view: View)
     fun onDismiss(view: View)
     fun onScale(percentage: Float)

@@ -20,7 +20,12 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     lateinit var moviesRepository: MoviesRepository
     val movies: LiveData<Resource<List<Movies>>>
     val moviesSelectionListener = SingleLiveEvent<Movies>()
-    val playerGestureListener = SingleLiveEvent<Int>()
+    val controllersListener = SingleLiveEvent<ViewsEvents>()
+
+    private val viewClicked = ViewsEvents.CLICKED()
+    private val viewShow = ViewsEvents.SHOW()
+    private val viewHide = ViewsEvents.HIDE()
+    private val viewLongPress = ViewsEvents.LONGPRESS()
 
     init {
         DaggerActivityComponent.builder()
@@ -35,6 +40,13 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
         moviesSelectionListener.value = movies
     }
 
+    fun showControllers(isShown: Boolean) {
+        controllersListener.value = if (isShown) viewShow else viewHide
+    }
+
+    fun onClicked(isLongPress: Boolean = false) {
+        controllersListener.value = if (isLongPress) viewLongPress else viewClicked
+    }
 
 
     fun getMoviesDetails(movieId: Int) = moviesRepository.getMoviesDetails(movieId)

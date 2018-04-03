@@ -1,4 +1,4 @@
-package com.burhanrashid52.player
+package com.burhanrashid52.player.player
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
@@ -6,15 +6,14 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.support.transition.TransitionInflater
-import android.view.LayoutInflater
-import androidx.content.systemService
 import androidx.net.toUri
 import androidx.os.bundleOf
 import androidx.view.isGone
 import androidx.view.isVisible
+import com.burhanrashid52.player.R
 import com.burhanrashid52.player.dashboard.DashboardViewModel
+import com.burhanrashid52.player.dashboard.ViewsEvents
 import ja.burhanrashid52.base.BaseFragment
 import ja.burhanrashid52.base.getActivityViewModel
 import ja.burhanrashid52.base.loadFromUrl
@@ -85,9 +84,13 @@ private constructor() : BaseFragment() {
             activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
 
-        dashboardViewModel.playerGestureListener.observe(this, Observer {
-            it?.let {
-                showControllers(!imgFullScreen.isVisible)
+        dashboardViewModel.controllersListener.observe(this, Observer {
+            when (it) {
+                is ViewsEvents.SHOW -> showControllers(true)
+                is ViewsEvents.HIDE -> showControllers(false)
+                is ViewsEvents.CLICKED -> showControllers(!imgFullScreen.isVisible)
+                is ViewsEvents.LONGPRESS -> TODO()
+                is ViewsEvents.NONE -> TODO()
             }
         })
     }

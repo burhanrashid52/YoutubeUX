@@ -1,9 +1,10 @@
-package com.burhanrashid52.player
+package com.burhanrashid52.player.player
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.os.bundleOf
+import com.burhanrashid52.player.R
 import ja.burhanrashid52.base.BaseFragment
 import ja.burhanrashid52.base.toast
 import kotlinx.android.synthetic.main.fragment_video_details.*

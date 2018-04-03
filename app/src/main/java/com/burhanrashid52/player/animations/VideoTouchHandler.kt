@@ -16,7 +16,7 @@ import timber.log.Timber
  * animation on Framelayout onTouchListener.The logic for animation resides here to make
  * it modular
  */
-class VideoTouchHandler(activity: Activity, private var eventsListener: Events) : View.OnTouchListener {
+class VideoTouchHandler(activity: Activity, private var gestureEventsListener: GestureEvents) : View.OnTouchListener {
 
     companion object {
         val TAG = VideoTouchHandler::class.java.simpleName
@@ -63,7 +63,7 @@ class VideoTouchHandler(activity: Activity, private var eventsListener: Events) 
             return false
         }
         if (gestureDetector.onTouchEvent(event)) {
-            eventsListener.onClick(view)
+            gestureEventsListener.onClick(view)
             return true
         }
         when (event.action) {
@@ -93,7 +93,7 @@ class VideoTouchHandler(activity: Activity, private var eventsListener: Events) 
 
                         Timber.e("" + percentHorizontal)
 
-                        eventsListener.onSwipe(percentHorizontal)
+                        gestureEventsListener.onSwipe(percentHorizontal)
                         //swipeVideo(percentHorizontal)
                     }
                     is Direction.UP, is Direction.DOWN, is Direction.NONE -> {
@@ -103,7 +103,7 @@ class VideoTouchHandler(activity: Activity, private var eventsListener: Events) 
 
                         //set up/down flag to avoid swipe scroll
                         isTopScroll = true
-                        eventsListener.onScale(percentVertical)
+                        gestureEventsListener.onScale(percentVertical)
                         //scaleVideo(percentVertical)
                     }
                 }
@@ -115,7 +115,7 @@ class VideoTouchHandler(activity: Activity, private var eventsListener: Events) 
                 isSwipeScroll = false
                 if (percentMarginMoved < 0.5) {
                     //dismiss the video player
-                    eventsListener.onDismiss(view)
+                    gestureEventsListener.onDismiss(view)
                     resetValues()
                 } else {
                     isExpanded = percentVertical < SCALE_THRESHOLD
@@ -159,7 +159,7 @@ class VideoTouchHandler(activity: Activity, private var eventsListener: Events) 
     var isExpanded = true
         set(value) {
             field = value
-            eventsListener.onExpand(field)
+            gestureEventsListener.onExpand(field)
         }
 
 

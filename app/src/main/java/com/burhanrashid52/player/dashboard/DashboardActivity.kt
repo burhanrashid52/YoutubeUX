@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.Handler
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.design.widget.BottomNavigationView
@@ -14,10 +13,10 @@ import android.support.transition.TransitionManager
 import android.view.View
 import android.view.animation.AnticipateOvershootInterpolator
 import com.burhanrashid52.player.R
-import com.burhanrashid52.player.VideoDetailsFragment
-import com.burhanrashid52.player.VideoPlayerFragment
+import com.burhanrashid52.player.player.VideoDetailsFragment
+import com.burhanrashid52.player.player.VideoPlayerFragment
 import com.burhanrashid52.player.activity.UserActivityFragment
-import com.burhanrashid52.player.animations.Events
+import com.burhanrashid52.player.animations.GestureEvents
 import com.burhanrashid52.player.animations.VideoTouchHandler
 import com.burhanrashid52.player.home.HomeFragment
 import com.burhanrashid52.player.library.LibraryFragment
@@ -28,15 +27,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_player.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import android.view.Menu
-import androidx.os.postDelayed
-import androidx.view.isGone
 import timber.log.Timber
 
 
 /**
  * Created by Burhanuddin Rashid on 2/25/2018.
  */
-class DashboardActivity : BaseActivity(), Events {
+class DashboardActivity : BaseActivity(), GestureEvents {
 
 
     companion object {
@@ -53,7 +50,9 @@ class DashboardActivity : BaseActivity(), Events {
     private lateinit var paramsGlMarginEnd: ConstraintLayout.LayoutParams
 
     private val constraintSet = ConstraintSet()
-    private val handler = Handler()
+
+    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var animationTouchListener: VideoTouchHandler
 
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
@@ -94,8 +93,6 @@ class DashboardActivity : BaseActivity(), Events {
         false
     }
 
-    private lateinit var mDashboardViewModel: DashboardViewModel
-    private lateinit var animationTouchListener: VideoTouchHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,7 +108,7 @@ class DashboardActivity : BaseActivity(), Events {
 
 
         supportActionBar?.title = "YouTube"
-        mDashboardViewModel = getViewModel()
+        dashboardViewModel = getViewModel()
 
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
@@ -119,7 +116,7 @@ class DashboardActivity : BaseActivity(), Events {
             replace(R.id.frmHomeContainer, HomeFragment.newInstance(), HomeFragment.TAG)
         }
 
-        mDashboardViewModel.moviesSelectionListener.observe(this, Observer {
+        dashboardViewModel.moviesSelectionListener.observe(this, Observer {
             it?.let {
                 animationTouchListener.show()
 
@@ -158,7 +155,7 @@ class DashboardActivity : BaseActivity(), Events {
         if (!animationTouchListener.isExpanded) {
             animationTouchListener.isExpanded = true
         } else {
-            mDashboardViewModel.playerGestureListener.value = 1
+            dashboardViewModel.onClicked()
         }
     }
 
@@ -167,6 +164,7 @@ class DashboardActivity : BaseActivity(), Events {
     }
 
     override fun onScale(percentage: Float) {
+        dashboardViewModel.showControllers(false)
         scaleVideo(percentage)
     }
 
@@ -181,6 +179,7 @@ class DashboardActivity : BaseActivity(), Events {
     override fun onBackPressed() {
         if (animationTouchListener.isExpanded) {
             animationTouchListener.isExpanded = false
+            dashboardViewModel.showControllers(false)
             if (!isPortrait()) {
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
             }

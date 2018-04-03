@@ -14,6 +14,7 @@ import ja.burhanrashid52.base.loadFragment
 import ja.burhanrashid52.base.repo.Status.*
 import ja.burhanrashid52.base.widgets.SimpleDividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_home.*
+import timber.log.Timber
 
 /**
  * Created by Burhanuddin Rashid on 3/6/2018.
@@ -30,7 +31,7 @@ private constructor() : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        retainInstance=true
+        retainInstance = true
     }
 
     private val homeAdapter = HomeAdapter {
@@ -56,7 +57,10 @@ private constructor() : BaseFragment() {
 
                 }
                 LOADING -> {
-
+                    Timber.e("Loading")
+                    it.data?.let {
+                        homeAdapter.moviesList = it.toMutableList()
+                    }
                 }
             }
         })
