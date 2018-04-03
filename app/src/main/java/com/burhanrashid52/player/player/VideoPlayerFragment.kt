@@ -84,6 +84,11 @@ private constructor() : BaseFragment() {
             activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
 
+        imgPlay.setOnClickListener {
+            videoPlayer.start()
+            showControllers(false)
+        }
+
         dashboardViewModel.controllersListener.observe(this, Observer {
             when (it) {
                 is ViewsEvents.SHOW -> showControllers(true)
@@ -107,6 +112,9 @@ private constructor() : BaseFragment() {
         Timber.e("Fragment Config Changes")
     }
 
+    /**
+     * Toggle the visibility of controller
+     */
     private fun showControllers(isShow: Boolean) {
         imgFullScreen.isGone = !isShow
         imgPlay.isGone = !isShow

@@ -15,7 +15,7 @@ import android.view.animation.AnticipateOvershootInterpolator
 import com.burhanrashid52.player.R
 import com.burhanrashid52.player.player.VideoDetailsFragment
 import com.burhanrashid52.player.player.VideoPlayerFragment
-import com.burhanrashid52.player.activity.UserActivityFragment
+import com.burhanrashid52.player.useractivity.UserActivityFragment
 import com.burhanrashid52.player.animations.GestureEvents
 import com.burhanrashid52.player.animations.VideoTouchHandler
 import com.burhanrashid52.player.home.HomeFragment

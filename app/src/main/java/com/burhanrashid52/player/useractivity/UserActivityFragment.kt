@@ -1,4 +1,4 @@
-package com.burhanrashid52.player.activity
+package com.burhanrashid52.player.useractivity
 
 import android.os.Bundle
 import android.view.View
