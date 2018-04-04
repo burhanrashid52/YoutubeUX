@@ -1,0 +1,36 @@
+{
+  "movieslist": {
+    "status": 200,
+    "source": "Success",
+    "movies": [
+      {
+        "id": 1,
+        "title": "Game of Thrones",
+        "description": "Game of Thrones is an American fantasy drama television series created by David Benioff and D. B. Weiss. It is an adaptation of A Song of Ice and Fire, George R. R. Martin's series of fantasy novels, the first of which is A Game of Thrones. It is filmed in Belfast and elsewhere in the United Kingdom, Canada, Croatia, Iceland, Malta, Morocco, Spain, and the United States. The series premiered on HBO in the United States on April 17, 2011, and its seventh season ended on August 27, 2017. The series will conclude with its eighth season premiering in 2019",
+        "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/242556.png?alt=media&token=4f2f9eb9-03ad-4411-be09-018f355464d4",
+        "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/Game%20of%20Thrones%20Season%207-%20Official%20Trailer%20(HBO).mp4?alt=media&token=0bd8a226-bf32-460e-bfc0-ae0ade28c2a5"
+      },
+      {
+        "id": 2,
+        "title": "Breaking Bad",
+        "description": "Walter White , a chemistry teacher, discovers that he has cancer and decides to get into the meth-making business to repay his medical debts. His priorities begin to change when he partners with Jesse.",
+        "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/breaking-bad-ps-vr.jpg?alt=media&token=d0ce3269-eb12-4597-b442-2a8e29d08817",
+        "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/Breaking%20Bad%20Trailer%20(First%20Season).mp4?alt=media&token=d36b0ba3-98da-4695-90ae-d9c449d8284a"
+      },
+        {
+        "id": 3,
+        "title": "Stranger Things",
+        "description": "Stranger Things is an American science fiction-horror web television series created, written, directed and co-executive produced by The Duffer Brothers, as well as co-executive produced by Shawn Levy and Dan Cohen. The first season, released in July 2016, stars Winona Ryder, David Harbour, Finn Wolfhard, Millie Bobby Brown, Gaten Matarazzo, Caleb McLaughlin, Natalia Dyer, Charlie Heaton, Cara Buono and Matthew Modine, with Noah Schnapp and Joe Keery in recurring roles",
+        "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/stranger_things-HD.jpg?alt=media&token=b156267d-07a9-4f22-a8d8-fc2ff6863bf5",
+        "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/stranger_things_trailer.mp4?alt=media&token=4fec1399-77d3-448f-8e98-91aaa3426d38"
+      },
+         {
+        "id": 4,
+        "title": "Westworld",
+        "description": "In a futuristic Western-themed amusement park, Westworld, the visitors interact with automatons. However, all hell breaks loose when the automatons begin malfunctioning.",
+        "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/westworld_s2.jpg?alt=media&token=99a3c1d2-4165-4a41-9b67-9604273d73c4",
+        "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/westworld_season_two.mp4?alt=media&token=53dfd0c7-f5d4-49c3-8a0d-79b64de32d2f"
+      }
+    ]
+  }
+}
