@@ -6,7 +6,14 @@
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     android:elevation="4dp"
-    app:titleTextColor="@android:color/black"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     app:popupTheme="@style/AppTheme.PopupOverlay"
-    app:title="@string/app_name" />
+    app:titleTextColor="@android:color/black">
+
+   <ImageView
+       android:layout_width="100dp"
+       android:layout_height="match_parent"
+       android:src="@drawable/logo_youtube" />
+
+
+</android.support.v7.widget.Toolbar>

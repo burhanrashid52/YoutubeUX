@@ -15,6 +15,7 @@
         <activity
             android:name=".dashboard.DashboardActivity"
             android:label="@string/app_name"
+            android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

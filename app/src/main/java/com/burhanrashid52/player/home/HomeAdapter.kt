@@ -1,5 +1,6 @@
 package com.burhanrashid52.player.home
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,7 @@ import android.view.ViewGroup
 import com.burhanrashid52.player.R
 import com.burhanrashid52.player.data.local.Movies
 import ja.burhanrashid52.base.loadFromUrl
-import kotlinx.android.synthetic.main.row_movies.view.*
+import kotlinx.android.synthetic.main.row_home_feed.view.*
 
 /**
  * Created by Burhanuddin Rashid on 3/7/2018.
@@ -21,8 +22,8 @@ class HomeAdapter(private val listener: ((Movies) -> Unit)? = null) : RecyclerVi
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.row_movies, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.row_home_feed, parent, false)
         return HomeViewHolder(view)
     }
 

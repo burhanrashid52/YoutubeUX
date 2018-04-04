@@ -1,17 +1,25 @@
-package com.burhanrashid52.player
+package com.burhanrashid52.player.player
 
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
+import android.support.transition.TransitionInflater
 import androidx.net.toUri
 import androidx.os.bundleOf
 import androidx.view.isGone
+import androidx.view.isVisible
+import com.burhanrashid52.player.R
 import com.burhanrashid52.player.dashboard.DashboardViewModel
+import com.burhanrashid52.player.dashboard.ViewsEvents
 import ja.burhanrashid52.base.BaseFragment
 import ja.burhanrashid52.base.getActivityViewModel
 import ja.burhanrashid52.base.loadFromUrl
 import ja.burhanrashid52.base.toast
 import kotlinx.android.synthetic.main.fragment_player.*
+import timber.log.Timber
 
 /**
  * Created by Burhanuddin Rashid on 2/21/2018.
@@ -34,6 +42,9 @@ private constructor() : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        }
     }
 
     private lateinit var dashboardViewModel: DashboardViewModel
@@ -44,6 +55,8 @@ private constructor() : BaseFragment() {
         dashboardViewModel = getActivityViewModel()
 
         val movieID = arguments?.getInt(EXTRA_MOVIE_ID) ?: 0
+
+        showControllers(false)
 
         dashboardViewModel.getMoviesDetails(movieID).observe(this, Observer {
 
@@ -60,20 +73,38 @@ private constructor() : BaseFragment() {
         })
 
         videoPlayer.setOnCompletionListener {
+            imgPlayPause.setImageResource(R.drawable.ic_pause_black_24dp)
             videoPlayer.start()
         }
 
         btnChild.setOnClickListener {
             toast("Video Clicked")
         }
-    }
 
-    override fun onDetach() {
-        super.onDetach()
-    }
+        imgFullScreen.setOnClickListener {
+            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+        imgPlayPause.setOnClickListener {
+            if (videoPlayer.isPlaying) {
+                videoPlayer.pause()
+                imgPlayPause.setImageResource(R.drawable.ic_play_arrow_black_24dp)
+            } else {
+                imgPlayPause.setImageResource(R.drawable.ic_pause_black_24dp)
+                videoPlayer.start()
+            }
+            showControllers(false)
+        }
+
+        dashboardViewModel.controllersListener.observe(this, Observer {
+            when (it) {
+                is ViewsEvents.SHOW -> showControllers(true)
+                is ViewsEvents.HIDE -> showControllers(false)
+                is ViewsEvents.CLICKED -> showControllers(!imgFullScreen.isVisible)
+                is ViewsEvents.LONGPRESS -> TODO()
+                is ViewsEvents.NONE -> TODO()
+            }
+        })
     }
 
     override fun onDestroy() {
@@ -81,5 +112,18 @@ private constructor() : BaseFragment() {
         if (videoPlayer != null) {
             videoPlayer.stopPlayback()
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        Timber.e("Fragment Config Changes")
+    }
+
+    /**
+     * Toggle the visibility of controller
+     */
+    private fun showControllers(isShow: Boolean) {
+        imgFullScreen.isGone = !isShow
+        imgPlayPause.isGone = !isShow
     }
 }

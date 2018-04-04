@@ -12,7 +12,10 @@ import ja.burhanrashid52.base.BaseFragment
 import ja.burhanrashid52.base.getActivityViewModel
 import ja.burhanrashid52.base.loadFragment
 import ja.burhanrashid52.base.repo.Status.*
+import ja.burhanrashid52.base.widgets.SimpleDividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_home.*
+import timber.log.Timber
+import kotlin.reflect.KFunction
 
 /**
  * Created by Burhanuddin Rashid on 3/6/2018.
@@ -27,6 +30,11 @@ private constructor() : BaseFragment() {
         fun newInstance() = HomeFragment()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     private val homeAdapter = HomeAdapter {
         dashboardViewModel.loadVideo(it)
     }
@@ -36,6 +44,7 @@ private constructor() : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         dashboardViewModel = getActivityViewModel()
         rvMovies.layoutManager = LinearLayoutManager(activity)
+        rvMovies.addItemDecoration(SimpleDividerItemDecoration(context))
         rvMovies.adapter = homeAdapter
 
         dashboardViewModel.movies.observe(this, Observer {
@@ -49,10 +58,12 @@ private constructor() : BaseFragment() {
 
                 }
                 LOADING -> {
-
+                    Timber.e("Loading")
+                    it.data?.let {
+                        homeAdapter.moviesList = it.toMutableList()
+                    }
                 }
             }
         })
     }
-
 }

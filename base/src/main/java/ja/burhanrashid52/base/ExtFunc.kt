@@ -1,8 +1,16 @@
 package ja.burhanrashid52.base
 
+import android.app.Activity
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.pm.ActivityInfo
+import android.support.annotation.DrawableRes
+import android.support.annotation.IdRes
+import android.support.annotation.IntDef
+import android.support.annotation.LayoutRes
+import android.support.constraint.ConstraintLayout
+import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentTransaction
@@ -36,6 +44,8 @@ inline fun AppCompatActivity.loadFragment(isAddToBackStack: Boolean = false,
     beginTransaction.commit()
 }
 
+fun Activity.isPortrait() = requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
 fun AppCompatActivity.getDeviceWidth() = with(this) {
     val displayMetrics = DisplayMetrics()
     windowManager.defaultDisplay.getMetrics(displayMetrics)
@@ -52,8 +62,12 @@ fun Fragment.toast(message: String, isLong: Boolean = false) {
     Toast.makeText(this.activity, message, if (isLong) Toast.LENGTH_LONG else Toast.LENGTH_SHORT).show()
 }
 
-fun AppCompatActivity.removeFragment(tag: String): Boolean {
+fun AppCompatActivity.removeFragmentByTag(tag: String): Boolean {
     return removeFragment(supportFragmentManager.findFragmentByTag(tag))
+}
+
+fun AppCompatActivity.removeFragmentByID(@IdRes containerID: Int): Boolean {
+    return removeFragment(supportFragmentManager.findFragmentById(containerID))
 }
 
 fun AppCompatActivity.removeFragment(fragment: Fragment?): Boolean {
@@ -83,6 +97,12 @@ fun ImageView.loadFromUrl(imageUrl: String, placeHolder: Int = R.drawable.img_pl
             .into(this)
 }
 
+inline fun ConstraintLayout.updateParams(constraintSet: ConstraintSet = ConstraintSet(), updates: ConstraintSet.() -> Unit) {
+    constraintSet.clone(this)
+    constraintSet.updates()
+    constraintSet.applyTo(this)
+}
+
 inline fun <reified T : ViewModel> FragmentActivity.getViewModel() = ViewModelProviders.of(this).get(T::class.java)
 
 inline fun <reified T : ViewModel> Fragment.getViewModel() = ViewModelProviders.of(this).get(T::class.java)
@@ -90,6 +110,4 @@ inline fun <reified T : ViewModel> Fragment.getViewModel() = ViewModelProviders.
 inline fun <reified T : ViewModel> Fragment.getActivityViewModel() = ViewModelProviders.of(activity!!).get(T::class.java)
 
 inline fun <reified T : ViewGroup.LayoutParams> View.getParams() = this.layoutParams as T
-
-inline fun <reified T : ViewGroup.LayoutParams> ViewGroup.getParams() = this.layoutParams as T
 

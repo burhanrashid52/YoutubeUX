@@ -1,31 +1,39 @@
 package com.burhanrashid52.player.dashboard
 
 import android.arch.lifecycle.Observer
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.design.widget.BottomNavigationView
 import android.support.transition.ChangeBounds
+import android.support.transition.Transition
 import android.support.transition.TransitionManager
 import android.view.View
 import android.view.animation.AnticipateOvershootInterpolator
 import com.burhanrashid52.player.R
-import com.burhanrashid52.player.VideoDetailsFragment
-import com.burhanrashid52.player.VideoPlayerFragment
-import com.burhanrashid52.player.animations.Events
+import com.burhanrashid52.player.player.VideoDetailsFragment
+import com.burhanrashid52.player.player.VideoPlayerFragment
+import com.burhanrashid52.player.useractivity.UserActivityFragment
+import com.burhanrashid52.player.animations.GestureEvents
 import com.burhanrashid52.player.animations.VideoTouchHandler
 import com.burhanrashid52.player.home.HomeFragment
+import com.burhanrashid52.player.library.LibraryFragment
+import com.burhanrashid52.player.subscriptions.SubscriptionFragment
+import com.burhanrashid52.player.trending.TrendingFragment
 import ja.burhanrashid52.base.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_player.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import android.view.Menu
+import timber.log.Timber
 
 
 /**
  * Created by Burhanuddin Rashid on 2/25/2018.
  */
-class DashboardActivity : BaseActivity(), Events {
+class DashboardActivity : BaseActivity(), GestureEvents {
 
 
     companion object {
@@ -43,6 +51,9 @@ class DashboardActivity : BaseActivity(), Events {
 
     private val constraintSet = ConstraintSet()
 
+    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var animationTouchListener: VideoTouchHandler
+
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
         when (it.itemId) {
@@ -53,22 +64,42 @@ class DashboardActivity : BaseActivity(), Events {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_library -> {
+                loadFragment {
+                    replace(R.id.frmHomeContainer, LibraryFragment.newInstance(), LibraryFragment.TAG)
+                }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
+                loadFragment {
+                    replace(R.id.frmHomeContainer, UserActivityFragment.newInstance(), UserActivityFragment.TAG)
+                }
+                return@OnNavigationItemSelectedListener true
+            }
+
+            R.id.navigation_trending -> {
+                loadFragment {
+                    replace(R.id.frmHomeContainer, TrendingFragment.newInstance(), TrendingFragment.TAG)
+                }
+                return@OnNavigationItemSelectedListener true
+            }
+
+            R.id.navigation_subscription -> {
+                loadFragment {
+                    replace(R.id.frmHomeContainer, SubscriptionFragment.newInstance(), SubscriptionFragment.TAG)
+                }
                 return@OnNavigationItemSelectedListener true
             }
         }
         false
     }
 
-    private lateinit var mDashboardViewModel: DashboardViewModel
-    private lateinit var animationTouchListener: VideoTouchHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        bottomNavigation.disableShiftMode(true)
 
         paramsGlHorizontal = guidelineHorizontal.getParams()
         paramsGlVertical = guidelineVertical.getParams()
@@ -77,7 +108,7 @@ class DashboardActivity : BaseActivity(), Events {
 
 
         supportActionBar?.title = "YouTube"
-        mDashboardViewModel = getViewModel()
+        dashboardViewModel = getViewModel()
 
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
@@ -85,7 +116,7 @@ class DashboardActivity : BaseActivity(), Events {
             replace(R.id.frmHomeContainer, HomeFragment.newInstance(), HomeFragment.TAG)
         }
 
-        mDashboardViewModel.moviesSelectionListener.observe(this, Observer {
+        dashboardViewModel.moviesSelectionListener.observe(this, Observer {
             it?.let {
                 animationTouchListener.show()
 
@@ -100,25 +131,40 @@ class DashboardActivity : BaseActivity(), Events {
             }
         })
 
-        val videoUrl = "http://www.sample-videos.com/video/mp4/480/big_buck_bunny_480p_30mb.mp4"
+        //  val videoUrl = "http://www.sample-videos.com/video/mp4/480/big_buck_bunny_480p_30mb.mp4"
 
-        animationTouchListener = VideoTouchHandler(this, this)
-
-        //animationTouchListener.isExpanded = true
         hide()
-
+        animationTouchListener = VideoTouchHandler(this, this)
         frmVideoContainer.setOnTouchListener(animationTouchListener)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.home_menu, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+
+//        val searchView = searchItem.actionView as SearchView
+        //      searchView.queryHint = "Search People"
+        // searchView.setOnQueryTextListener(this)
+
+        return true
+    }
+
     override fun onClick(view: View) {
-        animationTouchListener.isExpanded = true
+        if (!animationTouchListener.isExpanded) {
+            animationTouchListener.isExpanded = true
+        } else {
+            dashboardViewModel.onClicked()
+        }
     }
 
     override fun onDismiss(view: View) {
-        toast(if (removeFragment(VideoPlayerFragment.TAG)) "Removed" else "Failed")
+        dismiss()
     }
 
     override fun onScale(percentage: Float) {
+        dashboardViewModel.showControllers(false)
         scaleVideo(percentage)
     }
 
@@ -126,12 +172,21 @@ class DashboardActivity : BaseActivity(), Events {
         swipeVideo(percentage)
     }
 
+    override fun onExpand(isExpanded: Boolean) {
+        setViewExpanded(isExpanded)
+    }
+
     override fun onBackPressed() {
         if (animationTouchListener.isExpanded) {
             animationTouchListener.isExpanded = false
+            dashboardViewModel.showControllers(false)
+            if (!isPortrait()) {
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            }
         } else {
             super.onBackPressed()
         }
+
     }
 
     /**
@@ -177,19 +232,90 @@ class DashboardActivity : BaseActivity(), Events {
         guidelineMarginEnd.layoutParams = paramsGlMarginEnd
     }
 
-    private fun hide() {
-        with(constraintSet) {
-            clone(rootContainer)
+    /**
+     * Hide all video and video details fragment
+     */
+    private fun hide() = rootContainer.updateParams {
 
-            setGuidelinePercent(guidelineHorizontal.id, 100F)
-            setGuidelinePercent(guidelineVertical.id, 100F)
-            setAlpha(frmDetailsContainer.id, 0F)
+        setGuidelinePercent(guidelineHorizontal.id, 100F)
+        setGuidelinePercent(guidelineVertical.id, 100F)
+        setAlpha(frmDetailsContainer.id, 0F)
 
-            TransitionManager.beginDelayedTransition(rootContainer, ChangeBounds().apply {
-                interpolator = AnticipateOvershootInterpolator(1.0f)
-                duration = 250
+        TransitionManager.beginDelayedTransition(rootContainer, ChangeBounds().apply {
+            interpolator = AnticipateOvershootInterpolator(1.0f)
+            duration = 250
+        })
+    }
+
+    /**
+     * Expand or collapse the video fragment animation
+     */
+    private fun setViewExpanded(isExpanded: Boolean) = rootContainer.updateParams(constraintSet) {
+
+        setGuidelinePercent(guidelineHorizontal.id, if (isExpanded) 0F else VideoTouchHandler.MIN_VERTICAL_LIMIT)
+        setGuidelinePercent(guidelineVertical.id, if (isExpanded) 0F else VideoTouchHandler.MIN_HORIZONTAL_LIMIT)
+        setGuidelinePercent(guidelineBottom.id, if (isExpanded) 1F else VideoTouchHandler.MIN_BOTTOM_LIMIT)
+        setGuidelinePercent(guidelineMarginEnd.id, if (isExpanded) 1F else VideoTouchHandler.MIN_MARGIN_END_LIMIT)
+        setAlpha(frmDetailsContainer.id, if (isExpanded) 1.0F else 0F)
+
+        TransitionManager.beginDelayedTransition(rootContainer, ChangeBounds().apply {
+            interpolator = android.view.animation.AnticipateOvershootInterpolator(1.0f)
+            duration = 250
+        })
+    }
+
+    /**
+     * Show dismiss animation when user have moved
+     * more than 50% horizontally
+     */
+    private fun dismiss() = rootContainer.updateParams(constraintSet) {
+
+        setGuidelinePercent(guidelineVertical.id, VideoTouchHandler.MIN_HORIZONTAL_LIMIT - VideoTouchHandler.MIN_MARGIN_END_LIMIT)
+        setGuidelinePercent(guidelineMarginEnd.id, 0F)
+
+        TransitionManager.beginDelayedTransition(rootContainer, ChangeBounds().apply {
+            interpolator = AnticipateOvershootInterpolator(1.0f)
+            duration = 250
+            addListener(object : Transition.TransitionListener {
+                override fun onTransitionResume(transition: Transition) {
+                }
+
+                override fun onTransitionPause(transition: Transition) {
+                }
+
+                override fun onTransitionCancel(transition: Transition) {
+                }
+
+                override fun onTransitionStart(transition: Transition) {
+                }
+
+                override fun onTransitionEnd(transition: Transition) {
+                    //Remove Video when swipe animation is ended
+                    removeFragmentByID(R.id.frmVideoContainer)
+                }
             })
-            applyTo(rootContainer)
+        })
+    }
+
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        Timber.e("Config Changes")
+        if (isPortrait()) {
+            animationTouchListener.isEnabled = true
+            enableFullScreen(false)
+        } else {
+            animationTouchListener.isEnabled = false
+            if (!animationTouchListener.isExpanded) {
+                animationTouchListener.isExpanded = true
+            }
+            enableFullScreen(true)
+        }
+
+        //Update this params in last after all configuration changes are done
+        rootContainer.updateParams(constraintSet) {
+            constrainHeight(frmVideoContainer.id, if (isPortrait()) 0 else getDeviceHeight())
+            constrainWidth(frmVideoContainer.id, if (isPortrait()) 0 else getDeviceWidth())
         }
     }
 }
