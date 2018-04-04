@@ -59,13 +59,17 @@ class VideoTouchHandler(activity: Activity, private var gestureEventsListener: G
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, event: MotionEvent): Boolean {
-        if (!isEnabled) {
-            return false
-        }
+
         if (gestureDetector.onTouchEvent(event)) {
             gestureEventsListener.onClick(view)
+            //return only when player is more than threshold value i.e is already expanded
+            if (percentVertical > SCALE_THRESHOLD) return true
+        }
+
+        if (!isEnabled) {
             return true
         }
+
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 startX = event.rawX

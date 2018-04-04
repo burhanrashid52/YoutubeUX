@@ -73,6 +73,7 @@ private constructor() : BaseFragment() {
         })
 
         videoPlayer.setOnCompletionListener {
+            imgPlayPause.setImageResource(R.drawable.ic_pause_black_24dp)
             videoPlayer.start()
         }
 
@@ -84,8 +85,14 @@ private constructor() : BaseFragment() {
             activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
 
-        imgPlay.setOnClickListener {
-            videoPlayer.start()
+        imgPlayPause.setOnClickListener {
+            if (videoPlayer.isPlaying) {
+                videoPlayer.pause()
+                imgPlayPause.setImageResource(R.drawable.ic_play_arrow_black_24dp)
+            } else {
+                imgPlayPause.setImageResource(R.drawable.ic_pause_black_24dp)
+                videoPlayer.start()
+            }
             showControllers(false)
         }
 
@@ -117,6 +124,6 @@ private constructor() : BaseFragment() {
      */
     private fun showControllers(isShow: Boolean) {
         imgFullScreen.isGone = !isShow
-        imgPlay.isGone = !isShow
+        imgPlayPause.isGone = !isShow
     }
 }

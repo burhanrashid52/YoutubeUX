@@ -1,6 +1,7 @@
 package ja.burhanrashid52.base.di.modules
 
 import android.app.Application
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 import com.google.gson.FieldNamingPolicy
@@ -30,11 +31,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class BaseNetworkModule {
 
-    private val mBaseUrl = "https://my-json-server.typicode.com/burhanrashid52/AspectRatioExample/"
+    private val mBaseUrl = "https://my-json-server.typicode.com/burhanrashid52/YoutubeAnimation/"
 
     @Provides
     @BaseScope
-    fun providesSharedPreferences(application: Application) = PreferenceManager.getDefaultSharedPreferences(application)
+    fun providesSharedPreferences(application: Application): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(application)
 
     @Provides
     @BaseScope

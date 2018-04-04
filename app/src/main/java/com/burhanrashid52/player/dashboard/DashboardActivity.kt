@@ -311,5 +311,11 @@ class DashboardActivity : BaseActivity(), GestureEvents {
             }
             enableFullScreen(true)
         }
+
+        //Update this params in last after all configuration changes are done
+        rootContainer.updateParams(constraintSet) {
+            constrainHeight(frmVideoContainer.id, if (isPortrait()) 0 else getDeviceHeight())
+            constrainWidth(frmVideoContainer.id, if (isPortrait()) 0 else getDeviceWidth())
+        }
     }
 }

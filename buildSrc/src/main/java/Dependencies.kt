@@ -1,3 +1,5 @@
+import Versions.kotlin_version
+
 /**
  * Created by Burhanuddin on 2/24/2018.
  */
@@ -36,6 +38,7 @@ object PluginsDeps {
 
 object KotlinDeps {
     var kotlin_std_lib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:${Versions.kotlin_version}"
+    var kotlin_reflection = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin_version}"
     var kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
     var android_ktx = "androidx.core:core-ktx:0.2"
 }

@@ -35,4 +35,5 @@ dependencies {
     kapt DaggerDeps.compiler
     kapt ArchComponents.room_compiler
     kapt ArchComponents.life_cycle_compiler
+    implementation KotlinDeps.kotlin_reflection
 }

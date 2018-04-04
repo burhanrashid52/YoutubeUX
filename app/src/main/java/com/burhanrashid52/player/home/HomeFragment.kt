@@ -15,6 +15,7 @@ import ja.burhanrashid52.base.repo.Status.*
 import ja.burhanrashid52.base.widgets.SimpleDividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_home.*
 import timber.log.Timber
+import kotlin.reflect.KFunction
 
 /**
  * Created by Burhanuddin Rashid on 3/6/2018.

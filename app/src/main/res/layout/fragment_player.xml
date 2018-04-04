@@ -49,7 +49,7 @@
         app:srcCompat="@drawable/ic_fullscreen_black_24dp" />
 
     <ImageView
-        android:id="@+id/imgPlay"
+        android:id="@+id/imgPlayPause"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
