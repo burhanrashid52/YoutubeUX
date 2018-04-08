@@ -24,12 +24,19 @@
         "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/stranger_things-HD.jpg?alt=media&token=b156267d-07a9-4f22-a8d8-fc2ff6863bf5",
         "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/stranger_things_trailer.mp4?alt=media&token=4fec1399-77d3-448f-8e98-91aaa3426d38"
       },
-         {
+       {
         "id": 4,
         "title": "Westworld",
         "description": "In a futuristic Western-themed amusement park, Westworld, the visitors interact with automatons. However, all hell breaks loose when the automatons begin malfunctioning.",
         "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/westworld_s2.jpg?alt=media&token=99a3c1d2-4165-4a41-9b67-9604273d73c4",
         "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/westworld_season_two.mp4?alt=media&token=53dfd0c7-f5d4-49c3-8a0d-79b64de32d2f"
+      },
+      {
+        "id": 5,
+        "title": "Avengers : Infinity war",
+        "description": "Iron Man, Thor, the Hulk and the rest of the Avengers unite to battle their most powerful enemy yet -- the evil Thanos. On a mission to collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality.",
+        "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/avengers_infinity_war-HD.jpg?alt=media&token=c61f5cbe-d373-42e0-a634-89b0e82c0013",
+        "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/Marvel%20Studios'%20Avengers-%20Infinity%20War%20-%20Official%20Trailer.mp4?alt=media&token=42775b56-32f9-4504-bf58-9932ea16195f"
       }
     ]
   }
