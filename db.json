@@ -19,10 +19,10 @@
       },
       {
         "id": 3,
-        "title": "Breaking Bad",
-        "description": "Walter White , a chemistry teacher, discovers that he has cancer and decides to get into the meth-making business to repay his medical debts. His priorities begin to change when he partners with Jesse.",
-        "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/breaking-bad-ps-vr.jpg?alt=media&token=d0ce3269-eb12-4597-b442-2a8e29d08817",
-        "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/Breaking%20Bad%20Trailer%20(First%20Season).mp4?alt=media&token=d36b0ba3-98da-4695-90ae-d9c449d8284a"
+        "title": "Mission Impossible : Fallout",
+        "description": "Ethan Hunt and his IMF team find themselves in a race against time after a mission goes wrong.",
+        "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/MI6_Online_Teaser_Vertical_rgb.jpg?alt=media&token=a22bffe6-44fb-4a64-a989-83557a612795",
+        "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/mission_impossible_6.mp4?alt=media&token=6cf01fbb-6667-4ccc-8ac5-9910752bf19d"
       },
         {
         "id": 4,
@@ -37,6 +37,14 @@
         "description": "In a futuristic Western-themed amusement park, Westworld, the visitors interact with automatons. However, all hell breaks loose when the automatons begin malfunctioning.",
         "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/westworld_s2.jpg?alt=media&token=99a3c1d2-4165-4a41-9b67-9604273d73c4",
         "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/westworld_season_two.mp4?alt=media&token=53dfd0c7-f5d4-49c3-8a0d-79b64de32d2f"
+      },
+      ,
+      {
+        "id": 6,
+        "title": "Breaking Bad",
+        "description": "Walter White , a chemistry teacher, discovers that he has cancer and decides to get into the meth-making business to repay his medical debts. His priorities begin to change when he partners with Jesse.",
+        "poster": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/breaking-bad-ps-vr.jpg?alt=media&token=d0ce3269-eb12-4597-b442-2a8e29d08817",
+        "videoUrl": "https://firebasestorage.googleapis.com/v0/b/rashiddemo-2eca3.appspot.com/o/Breaking%20Bad%20Trailer%20(First%20Season).mp4?alt=media&token=d36b0ba3-98da-4695-90ae-d9c449d8284a"
       }
     ]
   }
