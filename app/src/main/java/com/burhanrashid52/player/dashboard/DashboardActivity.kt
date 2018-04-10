@@ -200,6 +200,7 @@ class DashboardActivity : BaseActivity(), GestureEvents {
         val movedPercent = percentVerticalMoved / VideoTouchHandler.MIN_VERTICAL_LIMIT
         val percentHorizontalMoved = VideoTouchHandler.MIN_HORIZONTAL_LIMIT * movedPercent
         val percentBottomMoved = 1F - movedPercent * (1F - VideoTouchHandler.MIN_BOTTOM_LIMIT)
+        Timber.e("Bottom : $percentBottomMoved")
         val percentMarginMoved = 1F - movedPercent * (1F - VideoTouchHandler.MIN_MARGIN_END_LIMIT)
 
         paramsGlHorizontal.guidePercent = percentVerticalMoved
