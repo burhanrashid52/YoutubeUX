@@ -22,5 +22,15 @@ data class Movies(
         val title: String = "",
 
         @field:SerializedName("poster")
-        val poster: String = ""
+        val poster: String = "",
+        @field:SerializedName("year")
+        val year: Int = 0,
+        @field:SerializedName("genre")
+        val genre: String = "",
+
+        @field:SerializedName("imdb")
+        val imdb: String = "",
+
+        @field:SerializedName("duration")
+        val duration: String = ""
 )

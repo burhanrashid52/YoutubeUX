@@ -46,13 +46,13 @@ inline fun AppCompatActivity.loadFragment(isAddToBackStack: Boolean = false,
 
 fun Activity.isPortrait() = requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-fun AppCompatActivity.getDeviceWidth() = with(this) {
+fun Activity.getDeviceWidth() = with(this) {
     val displayMetrics = DisplayMetrics()
     windowManager.defaultDisplay.getMetrics(displayMetrics)
     displayMetrics.widthPixels
 }
 
-fun AppCompatActivity.getDeviceHeight() = with(this) {
+fun Activity.getDeviceHeight() = with(this) {
     val displayMetrics = DisplayMetrics()
     windowManager.defaultDisplay.getMetrics(displayMetrics)
     displayMetrics.heightPixels
