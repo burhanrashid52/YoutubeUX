@@ -1,8 +1,11 @@
-# YoutubeAnimation
-With MVVM Architecture pattern using Android Architecture Components This is a sample app demonstrating Youtube player animation using constraint layout 
+# Youtube UI/UX Animation
+This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayout.It implements the Keyframe Animation feature in ConstrainLayout.This sample apps is build on MVVM Architecture pattern using Android Architecture Components and fully written in **Kotlin**.
 
+I love K..K..K..K..Kotlin
 
-
+ 
+ 
+ 
 ![YoutubeAnimation](https://github.com/burhanrashid52/YoutubeAnimation/blob/master/gifs/animation_demo.gif)
 
 
