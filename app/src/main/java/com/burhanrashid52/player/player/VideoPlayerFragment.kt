@@ -6,7 +6,10 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
 import android.support.transition.TransitionInflater
+import android.view.View
 import androidx.net.toUri
 import androidx.os.bundleOf
 import androidx.view.isGone
@@ -14,12 +17,12 @@ import androidx.view.isVisible
 import com.burhanrashid52.player.R
 import com.burhanrashid52.player.dashboard.DashboardViewModel
 import com.burhanrashid52.player.dashboard.ViewsEvents
-import ja.burhanrashid52.base.BaseFragment
-import ja.burhanrashid52.base.getActivityViewModel
-import ja.burhanrashid52.base.loadFromUrl
-import ja.burhanrashid52.base.toast
 import kotlinx.android.synthetic.main.fragment_player.*
 import timber.log.Timber
+import android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
+import android.view.View.OnSystemUiVisibilityChangeListener
+import ja.burhanrashid52.base.*
+
 
 /**
  * Created by Burhanuddin Rashid on 2/21/2018.
@@ -39,8 +42,24 @@ private constructor() : BaseFragment() {
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val decorView = activity?.window?.decorView
+        decorView?.setOnSystemUiVisibilityChangeListener { visibility ->
+            // Note that system bars will only be "visible" if none of the
+            // LOW_PROFILE, HIDE_NAVIGATION, or FULLSCREEN flags are set.
+            if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
+                // adjustments to your UI, such as showing the action bar or
+                // other navigational controls.
+                startTimer()
+            } else {
+                // adjustments to your UI, such as hiding the action bar or
+                // other navigational controls.
+                stopTimer()
+                showControllers(false)
+            }
+        }
         retainInstance = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
@@ -48,6 +67,7 @@ private constructor() : BaseFragment() {
     }
 
     private lateinit var dashboardViewModel: DashboardViewModel
+    private val handler = Handler()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -100,7 +120,14 @@ private constructor() : BaseFragment() {
             when (it) {
                 is ViewsEvents.SHOW -> showControllers(true)
                 is ViewsEvents.HIDE -> showControllers(false)
-                is ViewsEvents.CLICKED -> showControllers(!imgFullScreen.isVisible)
+                is ViewsEvents.CLICKED -> {
+                    showControllers(!imgFullScreen.isVisible)
+                    activity?.let {
+                        if (!it.isPortrait()) {
+                            enableFullScreen(true)
+                        }
+                    }
+                }
                 is ViewsEvents.LONGPRESS -> TODO()
                 is ViewsEvents.NONE -> TODO()
             }
@@ -126,4 +153,22 @@ private constructor() : BaseFragment() {
         imgFullScreen.isGone = !isShow
         imgPlayPause.isGone = !isShow
     }
+
+    private var countDownTimer: CountDownTimer? = null
+
+    private fun startTimer() {
+        countDownTimer = object : CountDownTimer(3000, 1000) {
+            override fun onFinish() {
+                enableFullScreen(true)
+                showControllers(false)
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+        }
+        countDownTimer?.start()
+    }
+
+    private fun stopTimer() = countDownTimer?.cancel()
 }
