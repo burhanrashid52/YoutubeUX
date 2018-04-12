@@ -1,12 +1,28 @@
 # Youtube UI/UX Animation
-This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayout.It implements the Keyframe Animation feature in ConstrainLayout.This sample apps is build on MVVM Architecture pattern using Android Architecture Components and fully written in **Kotlin**.
+This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayout.It implements the Keyframe Animation feature in ConstrainLayout.This sample apps is build on Android Architecture Components and fully written in **Kotlin**.
 
-I love K..K..K..K..Kotlin
+## Features
 
- 
- 
- 
-![YoutubeAnimation](https://github.com/burhanrashid52/YoutubeAnimation/blob/master/gifs/animation_demo.gif)
+  - Smooth Draggable Animation
+  - Customizable Video Player
+  - MVVM Architecture pattern using Android Architecture Components
+  
+
+## The Concept - Animation
+
+Below image shows how the layout has been desgin using guidlines and all the Fragments are constraints to this guidlines.When user drag the video fragment we starts scaling up/down the guideline values which scale the fragments automatically that's the advantage of using constraint layout with guidlines
+
+![](https://github.com/burhanrashid52/YoutubeAnimation/blob/master/gifs/the_concept.jpg)
+
+
+## Customisation
+
+| Fragment | FrameLayout  | Usage |
+| ------------- | ------------- | ------------- |
+| HomeFragment | `frmHomeContainer`  | This layout hold Fragments added from BottomNavigation
+| VideoPlayerFragment | `frmVideoContainer`  | This will have the video player  |
+| VideoDetailsFragment | `frmDetailsContainer`  | Contains Video Details Layout Desgin |
+| BaseBottomNavigationView | `bottomNavigation`  | Bottom Navigation bar |
 
 
 ## License
