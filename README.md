@@ -15,7 +15,7 @@ Proudly :muscle: made in [**Kotlin**](https://kotlinlang.org/)
   - MVVM Architecture pattern using Android Architecture Components
   
 
-## How does it looks ?
+## How does it looks
 
 ![](https://github.com/burhanrashid52/YoutubeUX/blob/master/gifs/youtube_ux_demo.gif)
 
