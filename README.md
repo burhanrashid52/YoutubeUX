@@ -15,6 +15,10 @@ Proudly :muscle: made in [**Kotlin**](https://kotlinlang.org/)
   
 
 ## How does it looks ?
+
+![](https://github.com/burhanrashid52/YoutubeUX/blob/master/gifs/youtube_ux_demo.gif)
+
+
 This video demonstarte the app animation.
 
 [![](https://img.youtube.com/vi/NSqsXxgbtPw/0.jpg)](https://www.youtube.com/watch?v=NSqsXxgbtPw)
