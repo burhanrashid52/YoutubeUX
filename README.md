@@ -1,4 +1,6 @@
 # Youtube UI/UX Animation
+![API](https://img.shields.io/badge/API-17%2B-brightgreen.svg)
+
 This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayout.It implements the Keyframe Animation feature in ConstrainLayout.This sample app is built on Android Architecture Components
 
 Proudly :muscle: made in [**Kotlin**](https://kotlinlang.org/)
@@ -57,9 +59,14 @@ Hit me on twitter [![Twitter](https://img.shields.io/badge/Twitter-%40burhanrash
 [![Facebook](https://img.shields.io/badge/Facebook-Burhanuddin%20Rashid-blue.svg)](https://www.facebook.com/Bursid)
 
 
+## Resources
+  - [Youtube UI/UX](https://www.uplabs.com/youtube)
+  - [Constraint Layout](https://constraintlayout.com)  
+  - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html)
+
 
 ## Credits
-Youtube App
+Its inspired from [Youtube Android App](https://play.google.com/store/apps/details?id=com.google.android.youtube&hl=en_IN)
 
 
 ## License
