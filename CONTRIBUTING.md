@@ -3,6 +3,6 @@
 1. Fork the project. 
 2. Make required changes and commit. 
 3. Generate pull request. Mention all the required description regarding changes you made.
-4. Follow MVVV pattern
+4. Should Follows MVVM pattern
 
 Happy coding.:-)
