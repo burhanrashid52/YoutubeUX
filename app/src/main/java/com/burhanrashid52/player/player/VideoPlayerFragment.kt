@@ -67,7 +67,6 @@ private constructor() : BaseFragment() {
     }
 
     private lateinit var dashboardViewModel: DashboardViewModel
-    private val handler = Handler()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -136,6 +135,7 @@ private constructor() : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        stopTimer()
         if (videoPlayer != null) {
             videoPlayer.stopPlayback()
         }
@@ -144,6 +144,12 @@ private constructor() : BaseFragment() {
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
         Timber.e("Fragment Config Changes")
+        stopTimer()
+        activity?.let {
+            if (it.isPortrait()) {
+                enableFullScreen(false)
+            }
+        }
     }
 
     /**
@@ -159,8 +165,13 @@ private constructor() : BaseFragment() {
     private fun startTimer() {
         countDownTimer = object : CountDownTimer(3000, 1000) {
             override fun onFinish() {
-                enableFullScreen(true)
-                showControllers(false)
+                activity?.let {
+                    //Toggle it when device is landscape mode
+                    if (!it.isPortrait()) {
+                        enableFullScreen(true)
+                        showControllers(false)
+                    }
+                }
             }
 
             override fun onTick(millisUntilFinished: Long) {
