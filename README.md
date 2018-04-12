@@ -5,24 +5,37 @@ This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayou
 
   - Smooth Draggable Animation
   - Customizable Video Player
+  - Dependency Injection (Dagger 2)
   - MVVM Architecture pattern using Android Architecture Components
   
 
+
 ## The Concept - Animation
 
-Below image shows how the layout has been desgin using guidlines and all the Fragments are constraints to this guidlines.When user drag the video fragment we starts scaling up/down the guideline values which scale the fragments automatically that's the advantage of using constraint layout with guidlines
+Below image shows how the layout has been desgin using guidelines and all the Fragments are constraints to this guidelines. When user drag the video fragment we starts scaling up/down the guideline values which scale the fragments automatically that's the advantage of using constraint layout with guidelines
 
 ![](https://github.com/burhanrashid52/YoutubeAnimation/blob/master/gifs/the_concept.jpg)
 
 
-## Customisation
+
+
+## Customization
 
 | Fragment | FrameLayout  | Usage |
 | ------------- | ------------- | ------------- |
-| HomeFragment | `frmHomeContainer`  | This layout hold Fragments added from BottomNavigation
+| HomeFragment , TradeFragment , LibraryFragment and UserActivityFragment | `frmHomeContainer`  | This layout hold Fragments added from BottomNavigation bar
 | VideoPlayerFragment | `frmVideoContainer`  | This will have the video player  |
 | VideoDetailsFragment | `frmDetailsContainer`  | Contains Video Details Layout Desgin |
 | BaseBottomNavigationView | `bottomNavigation`  | Bottom Navigation bar |
+
+
+
+## Architecture
+The app uses ViewModel to abstract the data from UI and MovieRepository as single source of truth for data. MovieRepository first fetch the data from database if exist than display data to the user and at the same time it also fetches data from the webservice and update the result in database and reflect the changes to UI from database.
+
+![](https://github.com/burhanrashid52/YoutubeAnimation/blob/master/gifs/archtiture.png)
+
+
 
 
 ## License
