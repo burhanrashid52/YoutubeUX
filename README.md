@@ -1,5 +1,5 @@
 # Youtube UI/UX Animation
-This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayout.It implements the Keyframe Animation feature in ConstrainLayout.This sample apps is build on Android Architecture Components
+This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayout.It implements the Keyframe Animation feature in ConstrainLayout.This sample app is built on Android Architecture Components
 
 Proudly :muscle: made in [**Kotlin**](https://kotlinlang.org/)
 
@@ -9,6 +9,14 @@ Proudly :muscle: made in [**Kotlin**](https://kotlinlang.org/)
   - Customizable Video Player
   - Dependency Injection (Dagger 2)
   - MVVM Architecture pattern using Android Architecture Components
+  
+
+## How does it looks ?
+This video demonstarte the app animation.
+
+[![](https://img.youtube.com/vi/NSqsXxgbtPw/0.jpg)](https://www.youtube.com/watch?v=NSqsXxgbtPw)
+
+[Direct Video Link](https://www.youtube.com/watch?v=NSqsXxgbtPw)
   
 
 
