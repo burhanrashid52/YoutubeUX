@@ -4,7 +4,7 @@
     "source": "Success",
     "movies": [
       {
-        "genre": "Fantasy,Serial",
+        "genre": "Fantasy , Serial",
         "imdb": "9.5",
         "duration": "1h 02min",
         "year": 2011,
