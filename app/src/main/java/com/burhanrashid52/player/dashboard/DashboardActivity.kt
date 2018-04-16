@@ -229,7 +229,7 @@ class DashboardActivity : BaseActivity(), GestureEvents {
         paramsGlVertical.guidePercent = percentHorizontalMoved
         paramsGlMarginEnd.guidePercent = percentMarginMoved
 
-        guidelineHorizontal.layoutParams = paramsGlHorizontal
+        guidelineVertical.layoutParams = paramsGlVertical
         guidelineMarginEnd.layoutParams = paramsGlMarginEnd
     }
 

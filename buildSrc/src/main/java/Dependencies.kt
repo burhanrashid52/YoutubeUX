@@ -10,7 +10,7 @@ object Versions {
     var min_sdk_version = 17
 
     internal var support_lib = "27.0.2"
-    internal var constraint_version = "1.0.2"
+    internal var constraint_version = "1.1.0"
     internal var kotlin_version = "1.2.31"
     internal var dagger_version = "2.14.1"
 
