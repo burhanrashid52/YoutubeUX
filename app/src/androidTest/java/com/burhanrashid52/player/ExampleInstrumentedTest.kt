@@ -2,6 +2,7 @@ package com.burhanrashid52.player
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import junit.framework.Assert.assertEquals
 
 import org.junit.Test
 import org.junit.runner.RunWith

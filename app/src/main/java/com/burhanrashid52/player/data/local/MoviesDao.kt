@@ -24,7 +24,7 @@ interface MoviesDao : BaseDao<Movies> {
 
 
     /**
-     * Get the
+     * Get the movie details on given id
      */
     @Query("SELECT * FROM Movies WHERE id=:movieId")
     fun getMoviesDetails(movieId: Int): LiveData<Movies>

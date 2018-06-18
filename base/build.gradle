@@ -74,10 +74,10 @@ dependencies {
     kapt ArchComponents.life_cycle_compiler
     api ArchComponents.paging
 
-    testImplementation TestDeps.junit
-    androidTestImplementation TestDeps.runner
-    androidTestImplementation TestDeps.espresso_core
+    testApi TestDeps.junit
+    androidTestApi TestDeps.runner
+    androidTestApi TestDeps.espresso_core
 
-    testImplementation TestDeps.test_live_data
-    testImplementation TestDeps.test_room
+    testApi TestDeps.test_live_data
+    testApi TestDeps.test_room
 }

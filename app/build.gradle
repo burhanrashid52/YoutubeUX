@@ -36,4 +36,11 @@ dependencies {
     kapt ArchComponents.room_compiler
     kapt ArchComponents.life_cycle_compiler
     implementation KotlinDeps.kotlin_reflection
+
+    testApi TestDeps.junit
+    androidTestApi TestDeps.runner
+    androidTestApi TestDeps.espresso_core
+
+    testApi TestDeps.test_live_data
+    testApi TestDeps.test_room
 }

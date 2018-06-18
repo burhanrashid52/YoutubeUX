@@ -18,7 +18,7 @@ object Versions {
     internal var runner_version = "1.0.1"
     internal var espresso_core_version = "3.0.1"
 
-    internal var gradle_plugin_version = "3.1.1"
+    internal var gradle_plugin_version = "3.2.0-alpha17"
 
     internal const val retrofit_version = "2.3.0"
     internal const val okhttp_version = "3.10.0"
