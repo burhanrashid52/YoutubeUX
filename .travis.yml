@@ -1,0 +1,68 @@
+language: android
+jdk: oraclejdk8
+sudo: required
+dist: precise
+
+env:
+    global:
+        - ADB_INSTALL_TIMEOUT=10    #Time out to 10 mins
+
+before_cache:
+    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+  directories:      #Cache all dirs under .gradle folder
+    - $HOME/.gradle/daemon      #Cache daemon logs
+    - $HOME/.gradle/native      #Cache library downloaded from the gradle dependency
+    - $HOME/.gradle/wrapper     #Cache the gradle
+
+android:
+    update_sdk: true
+    components:
+        - tools # to get the new `repository-11.xml`
+        - platform-tools
+        - tools # to install Android SDK tools 25.1.x (x = 6 right now)
+        - build-tools-27.0.3
+        - android-27
+
+        # Additional components
+        - extra-google-m2repository
+        - extra-android-m2repository
+        - sys-img-android-21-default/armeabi-v7a
+
+licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+
+before_install:
+    - yes | sdkmanager "build-tools;27.0.3"
+
+    # Handle the secrets
+    - openssl aes-256-cbc -K $encrypted_6ac56f5b3b7e_key -iv $encrypted_6ac56f5b3b7e_iv -in ./misc/secrets.tar.enc -out ./misc/secrets.tar -d
+    - cd misc && tar xvf secrets.tar && cd ..
+    - mv ./misc/google-services.json ./app/src/release/google-services.json
+
+before_script:
+    - chmod +x gradlew      #Grant permissions
+
+    # Create animations
+    - android list targets
+    - echo no | android create avd --force --name test --target android-21 --abi default/armeabi-v7a -d "Nexus 6"
+
+    # Start emulator
+    - emulator -avd test -no-skin -no-audio -no-window &
+    - android-wait-for-emulator
+
+    # Disable animations
+    - adb devices
+    - adb shell settings put global window_animation_scale 0.0 
+    - adb shell settings put global transition_animation_scale 0.0
+    - adb shell settings put global animator_duration_scale 0.0
+    - adb shell input keyevent 82 &
+
+script:
+    - ./gradlew lint app:assembleDebug jacocoTestReportDebug -PdisablePreDex --stacktrace
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
