@@ -39,9 +39,9 @@ before_install:
     - yes | sdkmanager "build-tools;27.0.3"
 
     # Handle the secrets
-    - openssl aes-256-cbc -K $encrypted_6ac56f5b3b7e_key -iv $encrypted_6ac56f5b3b7e_iv -in ./misc/secrets.tar.enc -out ./misc/secrets.tar -d
-    - cd misc && tar xvf secrets.tar && cd ..
-    - mv ./misc/google-services.json ./app/src/release/google-services.json
+    #- openssl aes-256-cbc -K $encrypted_6ac56f5b3b7e_key -iv $encrypted_6ac56f5b3b7e_iv -in ./misc/secrets.tar.enc -out ./misc/secrets.tar -d
+    #- cd misc && tar xvf secrets.tar && cd ..
+    #- mv ./misc/google-services.json ./app/src/release/google-services.json
 
 before_script:
     - chmod +x gradlew      #Grant permissions
