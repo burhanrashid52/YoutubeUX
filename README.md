@@ -3,7 +3,9 @@
 ![API](https://img.shields.io/badge/API-17%2B-brightgreen.svg)
 [![Uplabs](https://img.shields.io/badge/Uplabs-YoutubeUX-orange.svg)](https://www.uplabs.com/posts/youtubeux)
 [![AndroidWeekly](https://img.shields.io/badge/Android%20Weekly-%23305-blue.svg)](http://androidweekly.net/issues/issue-305)
-[![AwesomeAndroid](https://img.shields.io/badge/Awesome%20Android-%2397-pink.svg)](https://android.libhunt.com/newsletter/97) 
+[![AwesomeAndroid](https://img.shields.io/badge/Awesome%20Android-%2397-pink.svg)](https://android.libhunt.com/newsletter/97)
+[![Mindorks](https://img.shields.io/badge/Mindorks-%237-red.svg)](https://mindorks.com/newsletter/edition/7)
+
 
 This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayout.It implements the Keyframe Animation feature in ConstrainLayout.This sample app is built on Android Architecture Components
 
