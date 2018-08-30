@@ -8,8 +8,6 @@ import com.burhanrashid52.player.data.local.MoviesDao
 import com.burhanrashid52.player.util.LiveDataTestUtil
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
-import org.hamcrest.CoreMatchers.equalTo
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

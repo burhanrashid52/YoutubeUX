@@ -63,6 +63,7 @@ dependencies {
     api RetrofitDeps.logging
     api RetrofitDeps.gson
     api RetrofitDeps.gson_converter
+    api RetrofitDeps.mockWebServer
 
     api RxDeps.main
     api RxDeps.android

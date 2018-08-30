@@ -1,5 +1,7 @@
 package com.burhanrashid52.player
 
+import android.content.Context
+import android.support.multidex.MultiDex
 import ja.burhanrashid52.base.BaseApplication
 import ja.burhanrashid52.base.di.components.BaseNetworkComponent
 
@@ -16,5 +18,10 @@ open class PlayerApp : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         baseNetworkComponent = baseDaggerNetworkComponent
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 }

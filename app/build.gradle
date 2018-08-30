@@ -14,6 +14,7 @@ android {
         versionName Versions.version_name
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -36,6 +37,7 @@ dependencies {
     kapt ArchComponents.room_compiler
     kapt ArchComponents.life_cycle_compiler
     implementation KotlinDeps.kotlin_reflection
+    implementation OtherDeps.multidex
 
     testApi TestDeps.junit
     androidTestApi TestDeps.runner

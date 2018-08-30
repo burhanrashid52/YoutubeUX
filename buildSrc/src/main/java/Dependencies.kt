@@ -53,6 +53,7 @@ object OtherDeps {
     var beautyLogger = "com.github.ihsanbal:LoggingInterceptor:2.0.5"
     var glide = "com.github.bumptech.glide:glide:${Versions.glide_version}"
     var glide_processer = "com.github.bumptech.glide:compiler:${Versions.glide_version}"
+    val multidex = "com.android.support:multidex:1.0.3"
 }
 
 object DaggerDeps {
@@ -75,6 +76,7 @@ object RetrofitDeps {
     var okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp_version}"
     var oki = "com.squareup.okio:okio:${Versions.oki_version}"
     var logging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp_version}"
+    val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okhttp_version}"
     var gson = "com.google.code.gson:gson:2.6.2"
     var gson_converter = "com.squareup.retrofit2:converter-gson:2.0.1"
 }
