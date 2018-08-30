@@ -73,6 +73,7 @@ Hit me on twitter [![Twitter](https://img.shields.io/badge/Twitter-%40burhanrash
   - [Youtube UI/UX](https://www.uplabs.com/youtube)
   - [Constraint Layout](https://constraintlayout.com)  
   - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html)
+  - [Android New Sample](https://github.com/AkshayChordiya/android-arch-news-sample)
 
 
 ## Credits
