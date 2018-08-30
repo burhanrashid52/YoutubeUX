@@ -29,7 +29,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-class BaseNetworkModule {
+open class BaseNetworkModule {
 
     private val mBaseUrl = "https://my-json-server.typicode.com/burhanrashid52/YoutubeAnimation/"
 
@@ -78,7 +78,7 @@ class BaseNetworkModule {
 
     @Provides
     @BaseScope
-    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
+    open fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

@@ -7,9 +7,9 @@ import dagger.Provides
 import ja.burhanrashid52.base.di.scopes.BaseScope
 
 @Module
-class BaseAppModule(private var mApplication: Application) {
+open class BaseAppModule(private var mApplication: Application) {
 
     @Provides
     @BaseScope
-    fun provideApplication() = mApplication
+    open fun provideApplication() = mApplication
 }

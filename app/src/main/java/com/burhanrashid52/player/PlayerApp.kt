@@ -7,7 +7,7 @@ import ja.burhanrashid52.base.di.components.BaseNetworkComponent
 /**
  * Created by Burhanuddin on 2/25/2018.
  */
-class PlayerApp : BaseApplication() {
+open class PlayerApp : BaseApplication() {
 
     companion object {
         lateinit var baseNetworkComponent: BaseNetworkComponent
