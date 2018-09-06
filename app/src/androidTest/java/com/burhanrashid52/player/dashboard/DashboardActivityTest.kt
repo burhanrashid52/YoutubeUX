@@ -1,13 +1,20 @@
 package com.burhanrashid52.player.dashboard
 
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.Espresso.registerIdlingResources
+import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.action.ViewActions.click
+import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.support.v7.widget.RecyclerView
 import com.burhanrashid52.player.R
+import com.burhanrashid52.player.home.HomeAdapter
 import com.burhanrashid52.player.home.HomeFragment
 import com.burhanrashid52.player.library.LibraryFragment
+import com.burhanrashid52.player.player.VideoDetailsFragment
+import com.burhanrashid52.player.player.VideoPlayerFragment
 import com.burhanrashid52.player.subscriptions.SubscriptionFragment
 import com.burhanrashid52.player.trending.TrendingFragment
 import com.burhanrashid52.player.useractivity.UserActivityFragment
@@ -48,6 +55,15 @@ class DashboardActivityTest {
         testBottomClickIds(R.id.navigation_subscription)
         testBottomClickIds(R.id.navigation_home)
 
+    }
+
+    @Test
+    fun testMovieClickedAndMatchItToItsDetails(){
+        val homeFragment=mDashboardActivity.supportFragmentManager.findFragmentByTag(HomeFragment.TAG) as HomeFragment
+        IdlingRegistry.getInstance().register(homeFragment.countingIdleResources)
+        onView(withId(R.id.rvMovies)).perform(RecyclerViewActions.actionOnItemAtPosition<HomeAdapter.HomeViewHolder>(0, click()))
+        assertNotNull(mDashboardActivity.supportFragmentManager.findFragmentByTag(VideoPlayerFragment.TAG))
+        assertNotNull(mDashboardActivity.supportFragmentManager.findFragmentByTag(VideoDetailsFragment.TAG))
     }
 
     @After

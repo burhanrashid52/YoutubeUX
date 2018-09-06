@@ -43,6 +43,14 @@ dependencies {
     androidTestApi TestDeps.runner
     androidTestApi TestDeps.espresso_core
 
+    androidTestApi('com.android.support.test.espresso:espresso-contrib:2.2') {
+        // Necessary to avoid version conflicts
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+    }
+
     testApi TestDeps.test_live_data
     testApi TestDeps.test_room
 }

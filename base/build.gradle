@@ -81,4 +81,6 @@ dependencies {
 
     testApi TestDeps.test_live_data
     testApi TestDeps.test_room
+
+    api 'com.android.support.test.espresso:espresso-idling-resource:3.0.2'
 }
