@@ -10,7 +10,9 @@ ext {
 }
 
 android {
+
     compileSdkVersion Versions.compile_sdk_version
+
     defaultConfig {
         applicationId Versions.application_id
         minSdkVersion Versions.min_sdk_version
@@ -21,18 +23,25 @@ android {
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     kapt {
         generateStubs = true
     }
+
     dexOptions {
         // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
         preDexLibraries = preDexEnabled && !travisBuild
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
 }
