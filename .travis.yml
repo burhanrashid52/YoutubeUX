@@ -62,7 +62,7 @@ before_script:
     - adb shell input keyevent 82 &
 
 script:
-    - ./gradlew lint app:assembleDebug jacocoTestReportDebug -PdisablePreDex --stacktrace
+   # - ./gradlew lint app:assembleDebug jacocoTestReportDebug -PdisablePreDex --stacktrace
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
