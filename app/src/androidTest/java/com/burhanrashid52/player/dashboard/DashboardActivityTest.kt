@@ -1,14 +1,12 @@
 package com.burhanrashid52.player.dashboard
 
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.Espresso.registerIdlingResources
 import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import android.support.v7.widget.RecyclerView
 import com.burhanrashid52.player.R
 import com.burhanrashid52.player.home.HomeAdapter
 import com.burhanrashid52.player.home.HomeFragment
@@ -64,6 +62,7 @@ class DashboardActivityTest {
         onView(withId(R.id.rvMovies)).perform(RecyclerViewActions.actionOnItemAtPosition<HomeAdapter.HomeViewHolder>(0, click()))
         assertNotNull(mDashboardActivity.supportFragmentManager.findFragmentByTag(VideoPlayerFragment.TAG))
         assertNotNull(mDashboardActivity.supportFragmentManager.findFragmentByTag(VideoDetailsFragment.TAG))
+        IdlingRegistry.getInstance().unregister(homeFragment.countingIdleResources)
     }
 
     @After

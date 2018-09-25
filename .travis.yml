@@ -20,8 +20,8 @@ android:
     update_sdk: true
     components:
         - tools # to get the new `repository-11.xml`
-        - platform-tools
         - tools # to install Android SDK tools 25.1.x (x = 6 right now)
+        - platform-tools
         - build-tools-27.0.3
         - android-27
 
