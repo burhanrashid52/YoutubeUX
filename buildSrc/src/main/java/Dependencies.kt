@@ -11,14 +11,14 @@ object Versions {
 
     internal var support_lib = "27.0.2"
     internal var constraint_version = "1.1.0"
-    internal var kotlin_version = "1.2.31"
+    internal var kotlin_version = "1.2.51"
     internal var dagger_version = "2.14.1"
 
     internal var junit_version = "4.12"
     internal var runner_version = "1.0.1"
     internal var espresso_core_version = "3.0.1"
 
-    internal var gradle_plugin_version = "3.2.0-alpha17"
+    internal var gradle_plugin_version = "3.2.1"
 
     internal const val retrofit_version = "2.3.0"
     internal const val okhttp_version = "3.10.0"
