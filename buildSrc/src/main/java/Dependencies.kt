@@ -11,7 +11,7 @@ object Versions {
 
     internal var support_lib = "27.0.2"
     internal var constraint_version = "1.1.0"
-    internal var kotlin_version = "1.2.51"
+    internal var kotlin_version = "1.3.0"
     internal var dagger_version = "2.14.1"
 
     internal var junit_version = "4.12"
@@ -35,7 +35,7 @@ object PluginsDeps {
 }
 
 object KotlinDeps {
-    var kotlin_std_lib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:${Versions.kotlin_version}"
+    var kotlin_std_lib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
     var kotlin_reflection = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin_version}"
     var kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
     var android_ktx = "androidx.core:core-ktx:0.2"
