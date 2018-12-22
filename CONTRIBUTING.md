@@ -5,4 +5,4 @@
 3. Generate pull request. Mention all the required description regarding changes you made.
 4. Should Follows MVVM pattern
 
-Happy coding.:-)
+Happy coding :-)
