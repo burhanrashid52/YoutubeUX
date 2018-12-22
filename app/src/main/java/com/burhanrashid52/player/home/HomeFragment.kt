@@ -24,7 +24,7 @@ private constructor() : BaseFragment() {
     override fun getLayoutId() = R.layout.fragment_home
 
     companion object {
-        val TAG = HomeFragment::class.java.simpleName
+        const val TAG = "HomeFragment"
         fun newInstance() = HomeFragment()
     }
 
