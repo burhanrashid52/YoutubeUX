@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-24-alpha
+      - image: circleci/android:api-28-alpha
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -46,6 +46,9 @@ jobs:
       - run:
           name: Run Espresso UI Tests
           command: ./gradlew :app:connectedDebugAndroidTest
+      - run:
+          name: Run UnitTest
+          command: ./gradlew testDebugUnitTest
       - store_artifacts:
           path: app/build/reports
           destination: reports
