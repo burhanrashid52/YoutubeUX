@@ -7,7 +7,7 @@
 [![Mindorks](https://img.shields.io/badge/Mindorks%20Newsletter-%237-red.svg)](https://mindorks.com/newsletter/edition/7)
 
 
-This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayout.It implements the Keyframe Animation feature in ConstrainLayout.This sample app is built on Android Architecture Components
+This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayout.It implements the Keyframe Animation feature in ConstrainLayout.This sample app is built on Android Architecture Components.
 
 Proudly :muscle: made in [**Kotlin**](https://kotlinlang.org/)
 
