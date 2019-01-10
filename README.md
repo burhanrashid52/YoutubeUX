@@ -9,7 +9,7 @@
 
 This is a sample app demonstrating Youtube UX/UI animation using ConstraintLayout.It implements the Keyframe Animation feature in ConstrainLayout.This sample app is built on Android Architecture Components.
 
-Proudly :muscle: made in [**Kotlin**](https://kotlinlang.org/)
+Proudly :muscle: made in [**Kotlin**](https://kotlinlang.org/).
 
 ## Features
 
