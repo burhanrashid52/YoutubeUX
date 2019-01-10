@@ -3,9 +3,16 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+ext {
+    travisBuild = System.getenv("TRAVIS") == "true"
+    // allows for -Dpre-dex=false to be set
+    preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
+}
 
 android {
+
     compileSdkVersion Versions.compile_sdk_version
+
     defaultConfig {
         applicationId Versions.application_id
         minSdkVersion Versions.min_sdk_version
@@ -16,15 +23,27 @@ android {
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     kapt {
         generateStubs = true
     }
+
+    dexOptions {
+        // Skip pre-dexing when running on Travis CI or when disabled via -Dpre-dex=false.
+        preDexLibraries = preDexEnabled && !travisBuild
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
@@ -42,6 +61,14 @@ dependencies {
     testApi TestDeps.junit
     androidTestApi TestDeps.runner
     androidTestApi TestDeps.espresso_core
+
+    androidTestApi('com.android.support.test.espresso:espresso-contrib:2.2') {
+        // Necessary to avoid version conflicts
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+    }
 
     testApi TestDeps.test_live_data
     testApi TestDeps.test_room

@@ -116,8 +116,8 @@ class DashboardActivity : BaseActivity(), GestureEvents {
             replace(R.id.frmHomeContainer, HomeFragment.newInstance(), HomeFragment.TAG)
         }
 
-        dashboardViewModel.moviesSelectionListener.observe(this, Observer {
-            it?.let {
+        dashboardViewModel.moviesSelectionListener.observe(this, Observer { movies ->
+            movies?.let {
                 animationTouchListener.show()
 
                 loadFragment(transitionPairs = mapOf(getString(R.string.transition_poster) to imgPoster)) {
