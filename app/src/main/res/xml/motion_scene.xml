@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@layout/activity_home_small"
+        motion:constraintSetStart="@layout/activity_home">
+
+        <OnSwipe
+            motion:dragDirection="dragDown"
+            motion:touchAnchorId="@id/frmVideoContainer"
+            motion:touchAnchorSide="top" />
+
+        <KeyFrameSet>
+
+            <KeyPosition
+                motion:keyPositionType="parentRelative"
+                motion:percentX="0.3"
+                motion:framePosition="90"
+                motion:target="@id/frmVideoContainer" />
+        </KeyFrameSet>
+
+    </Transition>
+
+</MotionScene>

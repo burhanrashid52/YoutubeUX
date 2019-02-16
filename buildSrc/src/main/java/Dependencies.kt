@@ -5,12 +5,12 @@ object Versions {
     var application_id = "com.burhanrashid52.player"
     var version_code = 1
     var version_name = "1.0"
-    var compile_sdk_version = 27
-    var target_sdk_version = 27
+    var compile_sdk_version = 28
+    var target_sdk_version = 28
     var min_sdk_version = 17
 
-    internal var support_lib = "27.0.2"
-    internal var constraint_version = "1.1.0"
+    internal var support_lib = "27.1.0"
+    internal var constraint_version = "2.0.0-alpha3"
     internal var kotlin_version = "1.3.0"
     internal var dagger_version = "2.14.1"
 
@@ -25,7 +25,7 @@ object Versions {
     internal const val oki_version = "1.14.0"
     internal const val life_cycle_version = "1.1.0"
     internal const val room_version = "1.0.0"
-    internal const val paging_version = "1.0.0-alpha5"
+    internal const val paging_version = "1.0.0-alpha6"
     internal const val glide_version = "4.6.1"
 
 }

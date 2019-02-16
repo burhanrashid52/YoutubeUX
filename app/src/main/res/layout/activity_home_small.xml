@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:id="@+id/frmVideoContainer"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,9:16"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txtVideoTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Game of thrones"
+        app:layout_constraintEnd_toStartOf="@id/btnPlay"
+        app:layout_constraintStart_toEndOf="@id/frmVideoContainer"
+        app:layout_constraintTop_toTopOf="@id/frmVideoContainer" />
+
+    <TextView
+        android:id="@+id/txtVideoDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Game of thrones Game of thrones Game of thrones "
+        app:layout_constraintBottom_toBottomOf="@+id/frmVideoContainer"
+        app:layout_constraintEnd_toStartOf="@id/btnPlay"
+        app:layout_constraintStart_toEndOf="@id/frmVideoContainer"
+        app:layout_constraintTop_toBottomOf="@id/txtVideoTitle" />
+
+    <ImageButton
+        android:id="@+id/btnPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/frmVideoContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/frmVideoContainer"
+        app:srcCompat="@drawable/ic_play_arrow_black_24dp" />
+
+
+    <FrameLayout
+        android:id="@+id/frmVideoDetails"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorAccent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frmVideoContainer" />
+
+</android.support.constraint.ConstraintLayout>
