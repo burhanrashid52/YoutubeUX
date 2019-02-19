@@ -8,8 +8,8 @@
 
     <VideoView
         android:id="@+id/videoPlayer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

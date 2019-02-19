@@ -30,17 +30,7 @@
                 motion:layout_constraintTop_toTopOf="@id/videoContainer"
                 motion:layout_constraintBottom_toBottomOf="@id/videoContainer"
                 motion:layout_constraintStart_toStartOf="@id/videoContainer"
-                motion:layout_constraintEnd_toEndOf="@id/videoContainer"
-                />
-
-            <Constraint
-                android:id="@id/recyclerview_container"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                motion:layout_constraintTop_toBottomOf="@id/videoContainer"
-                motion:layout_constraintBottom_toBottomOf="parent"
-                motion:layout_constraintEnd_toEndOf="parent"
-                motion:layout_constraintStart_toStartOf="parent" />
+                motion:layout_constraintEnd_toEndOf="@id/videoContainer" />
 
             <Constraint
                 android:id="@id/frmDetailsContainer"
@@ -94,18 +84,6 @@
                 />
 
             <Constraint
-                android:id="@id/recyclerview_container"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                motion:layout_constraintTop_toBottomOf="@id/videoContainer"
-                motion:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-                motion:layout_constraintEnd_toEndOf="parent"
-                motion:layout_constraintStart_toStartOf="parent" />
-
-            <Constraint
                 android:id="@id/frmDetailsContainer"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -153,7 +131,7 @@
                 />
 
             <KeyPosition
-                motion:target="@id/recyclerview_container"
+                motion:target="@id/txtVideoTitle"
                 motion:framePosition="90"
                 motion:percentWidth="0"
                 motion:curveFit="linear"

@@ -44,6 +44,8 @@ object KotlinDeps {
 object SupportDeps {
     var appcompact_v7 = "com.android.support:appcompat-v7:${Versions.support_lib}"
     var desgin = "com.android.support:design:${Versions.support_lib}"
+    var cardView = "com.android.support:cardview-v7:${Versions.support_lib}"
+
     var vector_drawable = "com.android.support:support-vector-drawable:${Versions.support_lib}"
     var constraint_layout = "com.android.support.constraint:constraint-layout:${Versions.constraint_version}"
 }

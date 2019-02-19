@@ -46,6 +46,7 @@ dependencies {
     api KotlinDeps.android_ktx
     api SupportDeps.appcompact_v7
     api SupportDeps.desgin
+    api SupportDeps.cardView
     api SupportDeps.constraint_layout
 
     api OtherDeps.timber

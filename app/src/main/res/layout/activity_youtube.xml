@@ -10,6 +10,15 @@
     tools:ignore="contentDescription">
 
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <FrameLayout
         android:id="@+id/frmHomeContainer"
         android:layout_width="0dp"
@@ -20,7 +29,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
-    <android.support.constraint.ConstraintLayout
+
+    <View
         android:id="@+id/videoContainer"
         android:layout_width="match_parent"
         android:layout_height="320dp"
@@ -40,6 +50,7 @@
         app:layout_constraintEnd_toEndOf="@id/videoContainer"
         app:layout_constraintStart_toStartOf="@id/videoContainer"
         app:layout_constraintTop_toTopOf="@id/videoContainer" />
+
 
     <ImageView
         android:id="@+id/image_play"
@@ -65,8 +76,9 @@
         app:layout_constraintTop_toTopOf="@id/videoContainer"
         app:srcCompat="@drawable/ic_fullscreen_black_24dp" />
 
+
     <FrameLayout
-        android:id="@+id/recyclerview_container"
+        android:id="@+id/frmDetailsContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="?android:attr/windowBackground"
@@ -75,23 +87,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/videoContainer" />
 
-    <FrameLayout
-        android:id="@+id/frmDetailsContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/videoContainer" />
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/layout_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ja.burhanrashid52.base.widgets.BaseBottomNavigationView
         android:id="@+id/bottomNavigation"
