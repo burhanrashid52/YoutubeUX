@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import com.burhanrashid52.player.PlayerApp
 import com.burhanrashid52.player.R
-import com.burhanrashid52.player.animations.VideoTouchHandler
 import com.burhanrashid52.player.data.MoviesRepository
 import com.burhanrashid52.player.di.components.DaggerActivityComponent
-import com.burhanrashid52.player.home.HomeFragment
 import com.burhanrashid52.player.library.LibraryFragment
 import com.burhanrashid52.player.player.VideoDetailsFragment
 import com.burhanrashid52.player.player.VideoPlayerFragment
@@ -31,7 +29,7 @@ class HomeActivity : BaseActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
         when (it.itemId) {
             R.id.navigation_home -> {
-               /* loadFragment {
+                /*loadFragment {
                     replace(R.id.frmHomeContainer, HomeFragment.newInstance(), HomeFragment.TAG)
                 }*/
                 return@OnNavigationItemSelectedListener true
@@ -89,8 +87,7 @@ class HomeActivity : BaseActivity() {
         moviesRepository.moviesDao.getMovies().observe(this, Observer {
             if (it != null && it.isNotEmpty()) {
                 it[0].let {
-
-                    loadFragment {
+                   loadFragment {
                         replace(R.id.frmVideoContainer, VideoPlayerFragment.newInstance(it.id), VideoPlayerFragment.TAG)
                     }
 

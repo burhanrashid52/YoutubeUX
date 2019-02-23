@@ -23,8 +23,10 @@ data class Movies(
 
         @field:SerializedName("poster")
         val poster: String = "",
+
         @field:SerializedName("year")
         val year: Int = 0,
+
         @field:SerializedName("genre")
         val genre: String = "",
 
@@ -32,5 +34,11 @@ data class Movies(
         val imdb: String = "",
 
         @field:SerializedName("duration")
-        val duration: String = ""
+        val duration: String = "",
+
+        @field:SerializedName("videoWidth")
+        val videoWidth: Int = 0,
+
+        @field:SerializedName("videoHeight")
+        val videoHeight: Int = 0
 )

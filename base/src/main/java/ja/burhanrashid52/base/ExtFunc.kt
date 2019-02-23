@@ -89,7 +89,7 @@ fun Context.toast(message: String, isLong: Boolean = false) {
 fun ImageView.loadFromUrl(imageUrl: String, placeHolder: Int = R.drawable.img_placeholder) {
 
     val requestOptions = RequestOptions()
-    requestOptions.placeholder(R.drawable.img_placeholder)
+    requestOptions.placeholder(placeHolder)
 
     Glide.with(this.context)
             .load(imageUrl)

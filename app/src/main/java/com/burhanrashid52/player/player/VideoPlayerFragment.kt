@@ -7,7 +7,6 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.support.transition.TransitionInflater
 import android.view.View
 import androidx.net.toUri
@@ -17,11 +16,9 @@ import androidx.view.isVisible
 import com.burhanrashid52.player.R
 import com.burhanrashid52.player.dashboard.DashboardViewModel
 import com.burhanrashid52.player.dashboard.ViewsEvents
+import ja.burhanrashid52.base.*
 import kotlinx.android.synthetic.main.fragment_player.*
 import timber.log.Timber
-import android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
-import android.view.View.OnSystemUiVisibilityChangeListener
-import ja.burhanrashid52.base.*
 
 
 /**
@@ -47,15 +44,9 @@ private constructor() : BaseFragment() {
         super.onCreate(savedInstanceState)
         val decorView = activity?.window?.decorView
         decorView?.setOnSystemUiVisibilityChangeListener { visibility ->
-            // Note that system bars will only be "visible" if none of the
-            // LOW_PROFILE, HIDE_NAVIGATION, or FULLSCREEN flags are set.
             if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
-                // adjustments to your UI, such as showing the action bar or
-                // other navigational controls.
                 startTimer()
             } else {
-                // adjustments to your UI, such as hiding the action bar or
-                // other navigational controls.
                 stopTimer()
                 showControllers(false)
             }
@@ -94,10 +85,6 @@ private constructor() : BaseFragment() {
         videoPlayer.setOnCompletionListener {
             imgPlayPause.setImageResource(R.drawable.ic_pause_black_24dp)
             videoPlayer.start()
-        }
-
-        btnChild.setOnClickListener {
-            toast("Video Clicked")
         }
 
         imgFullScreen.setOnClickListener {

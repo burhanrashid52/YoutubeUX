@@ -5,6 +5,7 @@
     android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:applyMotionScene="true"
     app:layoutDescription="@xml/youtube_scene"
     app:showPaths="true"
     tools:ignore="contentDescription">
@@ -15,6 +16,7 @@
         layout="@layout/layout_toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:background="?android:attr/windowBackground"
-        app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +45,6 @@
         android:id="@+id/frmVideoContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorAccent"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@id/videoContainer"
         app:layout_constraintEnd_toEndOf="@id/videoContainer"

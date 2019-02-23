@@ -48,17 +48,17 @@ private constructor() : BaseFragment() {
         rvMovies.addItemDecoration(SimpleDividerItemDecoration(context))
         rvMovies.adapter = homeAdapter
 
-        countingIdleResources.increment()
+     //   countingIdleResources.increment()
         dashboardViewModel.movies.observe(this, Observer {
             when (it?.status) {
                 SUCCESS -> {
                     it.data?.let {
                         homeAdapter.moviesList = it.toMutableList()
                     }
-                    countingIdleResources.decrement()
+                            //   countingIdleResources.decrement()
                 }
                 ERROR -> {
-                    countingIdleResources.decrement()
+                   // countingIdleResources.decrement()
                 }
                 LOADING -> {
                     Timber.e("Loading")
